@@ -1,0 +1,92 @@
+id: folder-structure
+title: "Init: 폴더구조 세팅"
+order: 5
+enabled: true
+summary: "프로젝트의 기능 확장과 유지보수를 위해 src 기준 폴더구조와 각 디렉터리 역할을 정의한다."
+
+labels:
+  - Init
+  - Architecture
+
+dependsOn:
+  - ci-cd
+
+decision:
+  type: folder-architecture
+  selected: domain-structure
+  reason: "MVP에서는 도메인 단위로 기능을 모으는 구조를 기본값으로 둔다."
+  alternatives:
+    - domain-structure
+    - fsd
+
+inputs:
+  rootDirectory: src
+  selectedStructure: domain-structure
+  alternatives:
+    domainStructure:
+      description: "도메인 또는 기능 단위로 관련 코드와 UI를 함께 배치하는 구조"
+      exampleDirectories:
+        - src/app
+        - src/pages
+        - src/domains
+        - src/shared
+        - src/shared/components
+        - src/shared/lib
+        - src/shared/api
+        - src/shared/assets
+        - src/shared/styles
+    fsd:
+      description: "Feature-Sliced Design 계층을 기준으로 app, pages, widgets, features, entities, shared를 분리하는 구조"
+      exampleDirectories:
+        - src/app
+        - src/pages
+        - src/widgets
+        - src/features
+        - src/entities
+        - src/shared
+  indexFilePolicy:
+    useBarrelExports: true
+    fileName: index.ts
+  preserveExisting:
+    - src/main.tsx
+    - src/App.tsx
+
+references:
+  - path: references/folder-structure/tree.md
+    type: markdown
+    required: false
+  - path: references/folder-structure/rules.md
+    type: markdown
+    required: false
+  - path: references/folder-structure/domain-structure.md
+    type: markdown
+    required: false
+  - path: references/folder-structure/fsd.md
+    type: markdown
+    required: false
+
+tasks:
+  - "references/folder-structure와 decision.selected 값을 참고해 폴더구조를 생성한다."
+  - "src 하위에 공통 디렉터리와 도메인/기능 디렉터리를 생성한다."
+  - "필요한 경우 각 주요 디렉터리에 index.ts 또는 README.md를 추가해 역할을 명확히 한다."
+  - "기존 src/main.tsx와 src/App.tsx는 보존한다."
+
+acceptanceCriteria:
+  - "src 기준 폴더구조가 생성된다."
+  - "선택한 구조가 domain-structure 또는 fsd 중 하나로 명시된다."
+  - "references/folder-structure와 선택한 구조가 함께 반영된다."
+  - "공통 코드와 도메인/기능 코드의 위치가 구분된다."
+  - "기존 React entry file이 손상되지 않는다."
+
+files:
+  expected:
+    - src
+  avoid:
+    - .github/workflows
+    - package.json
+
+verification:
+  - "test -d src"
+  - "pnpm lint"
+  - "pnpm format:check"
+  - "pnpm build"

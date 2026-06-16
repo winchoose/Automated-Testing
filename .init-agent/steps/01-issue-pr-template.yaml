@@ -1,0 +1,77 @@
+id: issue-pr-template
+title: "Init: Issue / PR 템플릿 설정"
+order: 1
+enabled: true
+summary: "GitHub issue와 pull request 작성 흐름을 표준화하기 위한 템플릿을 설정한다."
+
+labels:
+  - Init
+  - GitHub
+
+dependsOn:
+  - project-baseline
+
+decision:
+  type: github-template
+  selected: markdown-template
+  reason: "GitHub 기본 템플릿은 Markdown 파일을 기반으로 동작하므로 repo 안에 템플릿 파일을 명시적으로 관리한다."
+
+inputs:
+  templateTargets:
+    issueTemplates:
+      - init-task
+      - bug-report
+      - feature-request
+    pullRequestTemplate: true
+  outputPaths:
+    issueTemplateDirectory: .github/ISSUE_TEMPLATE
+    pullRequestTemplate: .github/pull_request_template.md
+  includeInitTaskTemplate: true
+  includeBugReportTemplate: true
+  includeFeatureRequestTemplate: true
+  includePullRequestChecklist: true
+
+references:
+  - path: references/github-templates/issue-template/init_setup.md
+    type: markdown
+    required: false
+  - path: references/github-templates/issue-template/bug_report.md
+    type: markdown
+    required: false
+  - path: references/github-templates/issue-template/feature_request.md
+    type: markdown
+    required: false
+  - path: references/github-templates/pull-request-template.md
+    type: markdown
+    required: false
+
+tasks:
+  - ".github/ISSUE_TEMPLATE 디렉터리를 생성한다."
+  - "초기세팅 작업용 issue template을 생성한다."
+  - "bug report issue template을 생성한다."
+  - "feature request issue template을 생성한다."
+  - "pull request template을 생성한다."
+  - "references/github-templates와 conventions 문서를 참고해 템플릿을 작성한다."
+
+acceptanceCriteria:
+  - ".github/ISSUE_TEMPLATE 디렉터리가 존재한다."
+  - "초기세팅 작업용 issue template이 존재한다."
+  - "bug report issue template이 존재한다."
+  - "feature request issue template이 존재한다."
+  - ".github/pull_request_template.md 파일이 존재한다."
+  - "PR 템플릿에는 작업 내용, 검증, 참고 자료, 관련 이슈 섹션이 포함된다."
+  - "Issue 템플릿에는 목적, 작업 목록, 완료 기준 섹션이 포함된다."
+
+files:
+  expected:
+    - .github/ISSUE_TEMPLATE/init_task.md
+    - .github/ISSUE_TEMPLATE/bug_report.md
+    - .github/ISSUE_TEMPLATE/feature_request.md
+    - .github/pull_request_template.md
+  avoid: []
+
+verification:
+  - "test -f .github/ISSUE_TEMPLATE/init_task.md"
+  - "test -f .github/ISSUE_TEMPLATE/bug_report.md"
+  - "test -f .github/ISSUE_TEMPLATE/feature_request.md"
+  - "test -f .github/pull_request_template.md"

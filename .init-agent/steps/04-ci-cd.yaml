@@ -1,0 +1,120 @@
+id: ci-cd
+title: "Init: CI/CD 및 Vercel 배포 파이프라인 설정"
+order: 4
+enabled: true
+summary: "PR/branch 품질 검증용 CI와 main/develop push 시 Vercel에 연결된 개인 repo로 동기화하는 CD 파이프라인을 설정한다."
+
+labels:
+  - Init
+  - CI/CD
+  - Vercel
+
+dependsOn:
+  - eslint-prettier
+
+decision:
+  type: deployment-pipeline
+  selected: vercel-git-sync
+  reason: "MVP에서는 GitHub Actions가 직접 Vercel CLI로 배포하지 않고, main/develop push 후 Vercel에 연결된 개인 repo로 push하여 Vercel Git Integration이 배포를 담당하게 한다."
+  alternatives:
+    - vercel-git-sync
+    - vercel-cli-deploy
+
+inputs:
+  provider: vercel
+  trigger:
+    event: push
+    branches:
+      - main
+      - develop
+  sourceRepository:
+    branches:
+      - main
+      - develop
+  deploymentRepository:
+    owner: kimminna
+    name: 38-COLLABORATION-WEB-NAVER
+    branches:
+      - main
+      - develop
+    type: personal-repository
+  sync:
+    strategy: push-branches-to-deployment-repository
+    includeTags: false
+    forcePush: true
+    preserveGitHubDirectory: true
+  githubActions:
+    ciWorkflowPath: .github/workflows/ci.yml
+    cdWorkflowPath: .github/workflows/cd.yml
+    runner: ubuntu-latest
+    requiredSecrets:
+      - PERSONAL_REPO_PAT
+    nodeVersion: "20"
+    pnpmVersion: "10"
+  vercel:
+    integration: git
+    productionBranch: main
+    previewBranch: develop
+    installCommand: pnpm install --frozen-lockfile
+    buildCommand: pnpm build
+    outputDirectory: dist
+  env:
+    createExampleFile: true
+    exampleFilePath: .env.example
+    requiredVariables: []
+    note: "Vite 환경변수는 VITE_ prefix를 사용한다. 실제 값은 GitHub/Vercel secrets 또는 Vercel project environment variables에 등록한다."
+  vercelJson:
+    create: true
+    path: vercel.json
+    framework: vite
+    buildCommand: pnpm build
+    outputDirectory: dist
+    installCommand: pnpm install --frozen-lockfile
+
+references:
+  - path: references/ci-cd/ci.yaml
+    type: yaml
+    required: false
+  - path: references/ci-cd/cd.yaml
+    type: yaml
+    required: false
+
+tasks:
+  - "PR과 main/develop push를 트리거로 하는 CI workflow를 생성한다."
+  - "CI workflow에서 pnpm install, format check, lint, build를 실행한다."
+  - "main/develop push를 트리거로 하는 CD workflow를 생성한다."
+  - "CD workflow에서 Vercel에 연결된 개인 repo의 동일 브랜치로 코드를 push한다."
+  - "배포용 repo 정보는 inputs.deploymentRepository 값을 기준으로 설정한다."
+  - "repo push에 필요한 GitHub secret 이름을 명시한다."
+  - ".env.example을 생성해 필요한 환경변수 이름과 Vite prefix 규칙을 기록한다."
+  - "Vite/Vercel 배포 설정을 위한 vercel.json을 생성한다."
+  - "Vercel은 배포용 repo의 main 브랜치 변경을 감지해 production deployment를 수행한다."
+
+acceptanceCriteria:
+  - ".github/workflows/ci.yml 파일이 존재한다."
+  - ".github/workflows/cd.yml 파일이 존재한다."
+  - "CI workflow는 pull_request와 main/develop push에서 실행된다."
+  - "CI workflow는 pnpm install, format check, lint, build를 실행한다."
+  - "CD workflow는 main/develop push 또는 workflow_dispatch에서 실행된다."
+  - "CD workflow는 PERSONAL_REPO_PAT secret을 사용해 배포용 repo로 push한다."
+  - ".env.example 파일이 존재한다."
+  - "vercel.json 파일이 존재한다."
+  - "Vercel 배포는 Git Integration을 통해 배포용 repo의 main 브랜치를 기준으로 실행된다."
+  - "Vercel project의 production branch가 main으로 설정되어 있다."
+
+files:
+  expected:
+    - .github/workflows/ci.yml
+    - .github/workflows/cd.yml
+    - .env.example
+    - vercel.json
+  avoid:
+    - .vercel/project.json
+
+verification:
+  - "test -f .github/workflows/ci.yml"
+  - "test -f .github/workflows/cd.yml"
+  - "test -f .env.example"
+  - "test -f vercel.json"
+  - "pnpm install"
+  - "pnpm build"

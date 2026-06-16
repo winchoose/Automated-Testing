@@ -1,0 +1,91 @@
+id: router-absolute-path
+title: "Init: 라우터 및 절대경로 설정"
+order: 6
+enabled: true
+summary: "React Router 기반 라우팅 구조와 Vite/TypeScript 절대경로 alias를 설정한다."
+
+labels:
+  - Init
+  - Router
+  - Alias
+
+dependsOn:
+  - folder-structure
+
+decision:
+  type: router-and-path-alias
+  selected: react-router-dom-with-at-alias
+  reason: "MVP에서는 React Router로 클라이언트 라우팅을 구성하고, @ alias로 src 기준 절대경로 import를 사용한다."
+  alternatives:
+    - react-router-dom-with-at-alias
+    - tanstack-router-with-at-alias
+
+inputs:
+  router:
+    library: react-router-dom
+    api: createBrowserRouter
+    routingType: browser-router
+    routeDefinitionStyle: object-array
+    routeConfigFile: src/app/router/router.tsx
+    providerLocation: src/app/App.tsx
+    initialRoutes:
+      - path: /
+        element: HomePage
+  absolutePath:
+    alias: "@"
+    target: src
+    importRule: "src 내부 모듈을 import할 때 @ alias를 사용할 수 있다."
+    viteConfigFile: vite.config.ts
+    tsconfigFiles:
+      - tsconfig.app.json
+      - tsconfig.json
+  install:
+    dependencies:
+      - react-router-dom
+    devDependencies:
+      - "@types/node"
+  preserveExisting:
+    - src/main.tsx
+    - src/App.tsx
+
+references:
+  - path: references/router-absolute-path/router.md
+    type: markdown
+    required: false
+  - path: references/router-absolute-path/absolute-path.md
+    type: markdown
+    required: false
+
+tasks:
+  - "references/router-absolute-path와 conventions 문서를 참고해 라우터 및 절대경로를 설정한다."
+  - "react-router-dom을 설치한다."
+  - "createBrowserRouter를 사용해 객체 배열 형태의 라우터 설정 파일을 생성한다."
+  - "초기 홈 route를 구성한다."
+  - "App 컴포넌트 또는 provider 위치에 RouterProvider를 연결한다."
+  - "Vite config에 @ alias를 설정한다."
+  - "TypeScript config에 @/* paths alias를 설정한다."
+  - "기존 entry file이 손상되지 않도록 보존한다."
+
+acceptanceCriteria:
+  - "react-router-dom 의존성이 package.json에 추가된다."
+  - "라우터 설정 파일은 createBrowserRouter를 사용한다."
+  - "라우터는 객체 배열 형태로 route를 정의한다."
+  - "앱 엔트리에서 라우터가 연결된다."
+  - "vite.config.ts에 @ alias가 설정된다."
+  - "tsconfig에 @/* paths 설정이 추가된다."
+  - "pnpm build 명령이 통과한다."
+
+files:
+  expected:
+    - src/app/router/router.tsx
+    - vite.config.ts
+    - tsconfig.app.json
+    - package.json
+  avoid:
+    - .github/workflows
+
+verification:
+  - "pnpm install"
+  - "pnpm lint"
+  - "pnpm format:check"
+  - "pnpm build"

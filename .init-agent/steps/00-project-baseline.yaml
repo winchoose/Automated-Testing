@@ -1,0 +1,56 @@
+id: project-baseline
+title: "Init: 프로젝트 baseline 확인"
+order: 0
+enabled: true
+summary: "초기세팅 자동화를 시작하기 전에 현재 repo 상태와 기본 실행 기준을 확인한다."
+
+labels:
+  - Init
+  - Baseline
+
+dependsOn: []
+
+decision:
+  type: baseline
+  selected: existing-github-repository
+  reason: "사람이 GitHub repo를 생성하고 clone까지 완료한 기존 repo를 기준으로 초기세팅 자동화를 진행한다."
+
+inputs:
+  repositoryMode: existing
+  expectedDefaultBranch: main
+  expectedPackageManager: pnpm
+  expectedNodeVersion: "20"
+  initialState:
+    hasReadme: true
+    hasPackageJson: false
+    hasInitAgent: true
+
+references: []
+
+tasks:
+  - "현재 Git branch와 working tree 상태를 확인한다."
+  - "README.md 존재 여부를 확인한다."
+  - "package.json 존재 여부를 확인한다."
+  - "프로젝트에서 사용할 package manager와 Node.js 기준 버전을 확인한다."
+  - ".init-agent 설정 폴더가 존재하는지 확인한다."
+  - "이후 step들이 참조할 baseline 정보를 기록한다."
+
+acceptanceCriteria:
+  - "기존 GitHub repo를 기준으로 자동화를 시작할 수 있다."
+  - "현재 default branch가 확인된다."
+  - "README.md 존재 여부가 확인된다."
+  - "package.json이 아직 없다면 React 초기세팅 단계에서 생성 대상으로 처리된다."
+  - ".init-agent 폴더가 자동화 지시서 위치로 사용된다."
+
+files:
+  expected:
+    - README.md
+    - .init-agent/project.yaml
+    - .init-agent/workflow.yaml
+    - .init-agent/state.yaml
+  avoid: []
+
+verification:
+  - "git status --short --branch"
+  - "test -f README.md"
+  - "test -d .init-agent"

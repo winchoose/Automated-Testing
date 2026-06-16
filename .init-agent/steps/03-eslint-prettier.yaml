@@ -1,0 +1,100 @@
+id: eslint-prettier
+title: "Init: ESLint / Prettier 세팅"
+order: 3
+enabled: true
+summary: "React, Vite, TypeScript 프로젝트에 코드 품질 검사와 포맷팅 기준을 설정한다."
+
+labels:
+  - Init
+  - Quality
+
+dependsOn:
+  - react
+
+decision:
+  type: code-quality
+  selected: eslint-prettier
+  reason: "MVP에서는 ESLint로 정적 검사를 수행하고 Prettier로 코드 포맷을 일관되게 관리한다."
+  alternatives:
+    - eslint-prettier
+    - biome
+
+inputs:
+  language: typescript
+  framework: react
+  buildTool: vite
+  packageManager: pnpm
+  eslint:
+    configType: flat-config
+    configFile: eslint.config.js
+    includes:
+      - typescript
+      - react
+      - react-hooks
+      - react-refresh
+      - jsx-a11y
+  prettier:
+    configFile: .prettierrc
+    ignoreFile: .prettierignore
+  scripts:
+    lint: "eslint ."
+    lintFix: "eslint . --fix"
+    format: "prettier . --write"
+    formatCheck: "prettier . --check"
+  install:
+    devDependencies:
+      - eslint
+      - prettier
+      - typescript-eslint
+      - "@eslint/js"
+      - eslint-config-prettier
+      - eslint-plugin-react
+      - eslint-plugin-react-hooks
+      - eslint-plugin-react-refresh
+      - eslint-plugin-jsx-a11y
+      - globals
+      - prettier-plugin-tailwindcss
+
+references:
+  - path: references/eslint-prettier/eslint.config.js
+    type: code
+    required: false
+  - path: references/eslint-prettier/.prettierrc
+    type: code
+    required: false
+  - path: references/eslint-prettier/.prettierignore
+    type: code
+    required: false
+
+tasks:
+  - "ESLint와 Prettier 관련 devDependencies를 설치한다."
+  - "ESLint flat config를 설정한다."
+  - "React, React Hooks, React Refresh, TypeScript, JSX accessibility 관련 ESLint 설정을 반영한다."
+  - "Prettier 설정 파일을 생성한다."
+  - "Prettier ignore 파일을 생성한다."
+  - "package.json에 lint, lint:fix, format, format:check scripts를 추가한다."
+  - "references/eslint-prettier와 conventions 문서를 참고해 설정을 작성한다."
+
+acceptanceCriteria:
+  - "eslint.config.js 파일이 존재한다."
+  - ".prettierrc 파일이 존재한다."
+  - ".prettierignore 파일이 존재한다."
+  - "package.json에 lint script가 존재한다."
+  - "package.json에 format:check script가 존재한다."
+  - "pnpm lint 명령이 통과한다."
+  - "pnpm format:check 명령이 통과한다."
+
+files:
+  expected:
+    - eslint.config.js
+    - .prettierrc
+    - .prettierignore
+    - package.json
+  avoid:
+    - .github/workflows
+
+verification:
+  - "pnpm install"
+  - "pnpm lint"
+  - "pnpm format:check"
+  - "pnpm build"
