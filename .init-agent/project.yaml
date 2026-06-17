@@ -6,7 +6,7 @@ project:
     provider: github
     owner: "winchoose"
     name: Automated-Testing
-    defaultBranch: develop
+    defaultBranch: main
 
 runtime:
   language: typescript
@@ -19,5 +19,5 @@ deployment:
   provider: vercel
   strategy: git-sync
   targetRepository:
-    owner: winchoose
+    owner: Automated-Testing-taek
     name: Automated-Testing

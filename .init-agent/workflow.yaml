@@ -29,7 +29,7 @@ github:
   provider: github
   issue:
     create: true
-    titlePattern: "{title}"
+    titlePattern: "[Init] {shortTitle}"
     labelsFromStep: true
     body:
       includeSummary: true
@@ -38,15 +38,15 @@ github:
       includeReferences: true
   branch:
     create: true
-    namePattern: "init/{order}-{id}"
+    namePattern: "init/{shortDescription}/#{issueNumber}"
     baseBranch: main
   commit:
     create: true
-    messagePattern: "chore: {title}"
+    messagePattern: "init: {shortTitle} 초기 세팅"
   pullRequest:
     create: true
     draft: false
-    titlePattern: "{title}"
+    titlePattern: "Init: {shortTitle}"
     labelsFromStep: true
     body:
       includeSummary: true

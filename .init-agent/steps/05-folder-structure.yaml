@@ -52,12 +52,6 @@ inputs:
     - src/App.tsx
 
 references:
-  - path: references/folder-structure/tree.md
-    type: markdown
-    required: false
-  - path: references/folder-structure/rules.md
-    type: markdown
-    required: false
   - path: references/folder-structure/domain-structure.md
     type: markdown
     required: false

@@ -1,0 +1,105 @@
+status: idle
+currentStep: null
+
+completedSteps: []
+failedSteps: []
+skippedSteps: []
+
+steps:
+  project-baseline:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  issue-pr-template:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  react:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  eslint-prettier:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  ci-cd:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  folder-structure:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  router-absolute-path:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  tanstack-query:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  http-client:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  svgr:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  design-system:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+  env-config:
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
+
+github:
+  issues: {}
+  pullRequests: {}
+  branches: {}
+
+lastRun:
+  startedAt: null
+  finishedAt: null
+  step: null
+  error: null
+
+history: []
