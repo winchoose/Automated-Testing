@@ -1,0 +1,81 @@
+id: http-client
+title: "Init: HTTP client 세팅"
+order: 8
+enabled: true
+summary: "API 요청을 공통화하기 위해 HTTP client 라이브러리를 선택하고 기본 client 구조를 설정한다."
+
+labels:
+  - Init
+  - API
+  - HTTP Client
+
+dependsOn:
+  - tanstack-query
+
+decision:
+  type: http-client
+  selected: ky
+  reason: "MVP에서는 가볍고 fetch 기반으로 동작하는 ky를 사용해 공통 API client를 구성한다."
+  alternatives:
+    - ky
+    - axios
+
+inputs:
+  library: ky
+  client:
+    clientFile: src/shared/api/client.ts
+    baseUrlEnv: VITE_BASE_URL
+    exportName: apiClient
+  behavior:
+    timeout: 10000
+    retry: 0
+    parseJson: true
+    throwHttpErrors: true
+  auth:
+    enabled: false
+    tokenInjection: none
+  errorHandling:
+    strategy: common-error-normalization
+    includeStatusCode: true
+    includeResponseBody: true
+  install:
+    dependencies:
+      - ky
+    devDependencies: []
+
+references:
+  - path: references/http-client/ky-rules.md
+    type: markdown
+    required: false
+  - path: references/http-client/axios-rules.md
+    type: markdown
+    required: false
+
+tasks:
+  - "선택된 HTTP client 라이브러리를 설치한다."
+  - "공통 API client 파일을 생성한다."
+  - "baseURL을 Vite 환경변수에서 읽도록 설정한다."
+  - "공통 에러 처리 전략을 정의한다."
+  - "TanStack Query에서 사용할 API 요청 함수와 분리 가능한 구조로 작성한다."
+  - "references/http-client와 conventions 문서를 참고해 client 정책을 반영한다."
+
+acceptanceCriteria:
+  - "선택된 HTTP client 의존성이 package.json에 추가된다."
+  - "공통 API client 파일이 존재한다."
+  - "API baseURL은 환경변수에서 읽는다."
+  - "공통 에러 처리 기준이 코드 또는 문서에 반영된다."
+  - "TanStack Query hook과 API 요청 함수를 분리해 사용할 수 있는 구조다."
+  - "pnpm build 명령이 통과한다."
+
+files:
+  expected:
+    - src/shared/api/client.ts
+    - package.json
+  avoid:
+    - .github/workflows
+
+verification:
+  - "pnpm install"
+  - "pnpm lint"
+  - "pnpm format:check"
+  - "pnpm build"

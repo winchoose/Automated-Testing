@@ -1,0 +1,83 @@
+id: svgr
+title: "Init: SVGR 아이콘 세팅"
+order: 9
+enabled: true
+summary: "SVG 원본 파일을 React 아이콘 컴포넌트로 변환하는 SVGR 기반 아이콘 빌드 구조를 설정한다."
+
+labels:
+  - Init
+  - Icons
+  - SVGR
+
+dependsOn:
+  - http-client
+
+decision:
+  type: icon-build
+  selected: svgr
+  reason: "SVG 파일을 React 컴포넌트로 변환해 일관된 아이콘 사용 방식을 제공하기 위해 SVGR을 사용한다."
+  alternatives:
+    - svgr
+    - vite-svg-loader
+    - manual-svg-components
+
+inputs:
+  sourceDirectory: src/shared/assets/svg
+  outputDirectory: src/shared/icons
+  scriptName: build:icons
+  scriptFile: scripts/build-icons.ts
+  generatedIndexFile: src/shared/icons/index.ts
+  component:
+    extension: tsx
+    exportStyle: named
+    namePrefix: IcSvg
+    fileNamePrefix: ic-
+    colorStrategy: currentColor
+    iconProps: SVGProps
+  install:
+    devDependencies:
+      - "@svgr/cli"
+      - tsx
+
+references:
+  - path: references/svgr/rules.md
+    type: markdown
+    required: false
+  - path: references/svgr/build-icons.md
+    type: markdown
+    required: false
+
+tasks:
+  - "SVGR 관련 devDependencies를 설치한다."
+  - "SVG 원본을 보관할 src/shared/assets/svg 디렉터리를 생성한다."
+  - "생성된 아이콘 컴포넌트를 둘 src/shared/icons 디렉터리를 생성한다."
+  - "아이콘 빌드 스크립트를 생성한다."
+  - "package.json에 build:icons script를 추가한다."
+  - "SVGR 실행 결과가 src/shared/icons에 생성되도록 설정한다."
+  - "아이콘 컴포넌트를 import할 수 있도록 index.ts export 구조를 구성한다."
+  - "references/svgr와 conventions 문서를 참고해 아이콘 생성/사용 규칙을 반영한다."
+
+acceptanceCriteria:
+  - "@svgr/cli devDependency가 package.json에 추가된다."
+  - "src/shared/assets/svg 디렉터리가 존재한다."
+  - "src/shared/icons 디렉터리가 존재한다."
+  - "아이콘 빌드 스크립트가 존재한다."
+  - "package.json에 build:icons script가 존재한다."
+  - "pnpm build:icons 명령으로 SVG를 React 컴포넌트로 생성할 수 있다."
+  - "생성된 아이콘 컴포넌트는 src/shared/icons에서 import할 수 있다."
+
+files:
+  expected:
+    - src/shared/assets/svg
+    - src/shared/icons
+    - scripts/build-icons.ts
+    - package.json
+  avoid:
+    - .github/workflows
+
+verification:
+  - "pnpm install"
+  - "pnpm build:icons"
+  - "pnpm lint"
+  - "pnpm format:check"
+  - "pnpm build"
