@@ -1,0 +1,23 @@
+project:
+  name: Automated-Testing
+  description: "자동화 생성과 테스트를 위한 레포지토리"
+  type: frontend
+  repository:
+    provider: github
+    owner: "winchoose"
+    name: Automated-Testing
+    defaultBranch: develop
+
+runtime:
+  language: typescript
+  framework: react
+  buildTool: vite
+  packageManager: pnpm
+  nodeVersion: "20"
+
+deployment:
+  provider: vercel
+  strategy: git-sync
+  targetRepository:
+    owner: winchoose
+    name: Automated-Testing

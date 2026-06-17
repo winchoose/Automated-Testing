@@ -1,0 +1,101 @@
+workflow:
+  name: initial-setup
+  description: "기존 GitHub repo에서 초기세팅을 단계별 issue/PR 단위로 자동화한다."
+  mode: auto
+  stopOnFailure: true
+
+execution:
+  strategy: sequential
+  requireCleanWorkingTree: true
+  runOneStepPerPullRequest: true
+  updateStateFile: true
+  stateFile: .init-agent/state.yaml
+
+referencePolicy:
+  conventionFile: .init-agent/conventions/code.md
+  priority:
+    - step.references
+    - conventions
+    - current-repository-state
+    - agent-defaults
+  behavior:
+    adaptToProject: true
+    doNotCopyBlindly: true
+    recordAdjustmentsInPullRequest: true
+    stopOnReferenceConflict: false
+
+github:
+  enabled: true
+  provider: github
+  issue:
+    create: true
+    titlePattern: "{title}"
+    labelsFromStep: true
+    body:
+      includeSummary: true
+      includeTasks: true
+      includeAcceptanceCriteria: true
+      includeReferences: true
+  branch:
+    create: true
+    namePattern: "init/{order}-{id}"
+    baseBranch: main
+  commit:
+    create: true
+    messagePattern: "chore: {title}"
+  pullRequest:
+    create: true
+    draft: false
+    titlePattern: "{title}"
+    labelsFromStep: true
+    body:
+      includeSummary: true
+      includeChanges: true
+      includeVerification: true
+      includeReferences: true
+      includeRelatedIssue: true
+  merge:
+    enabled: true
+    strategy: squash
+    waitForChecks: true
+    deleteBranchAfterMerge: true
+    stopIfChecksFail: true
+    requireHumanApproval: false
+
+verification:
+  runStepVerification: true
+  requireVerificationSuccess: true
+  recordCommandsInPullRequest: true
+
+failureHandling:
+  onStepFailure: stop
+  onVerificationFailure: stop
+  onMergeFailure: stop
+  writeFailureToState: true
+  leavePullRequestOpen: true
+
+steps:
+  - id: project-baseline
+    file: steps/00-project-baseline.yaml
+  - id: issue-pr-template
+    file: steps/01-issue-pr-template.yaml
+  - id: react
+    file: steps/02-react.yaml
+  - id: eslint-prettier
+    file: steps/03-eslint-prettier.yaml
+  - id: ci-cd
+    file: steps/04-ci-cd.yaml
+  - id: folder-structure
+    file: steps/05-folder-structure.yaml
+  - id: router-absolute-path
+    file: steps/06-router-absolute-path.yaml
+  - id: tanstack-query
+    file: steps/07-tanstack-query.yaml
+  - id: http-client
+    file: steps/08-http-client.yaml
+  - id: svgr
+    file: steps/09-svgr.yaml
+  - id: design-system
+    file: steps/10-design-system.yaml
+  - id: env-config
+    file: steps/11-env-config.yaml
