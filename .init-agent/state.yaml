@@ -1,5 +1,5 @@
-status: running
-currentStep: svgr
+status: idle
+currentStep: null
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -10,6 +10,7 @@ completedSteps:
   - router-absolute-path
   - tanstack-query
   - http-client
+  - svgr
 failedSteps: []
 skippedSteps: []
 steps:
@@ -77,12 +78,12 @@ steps:
     commit: 31f388be663438c2276c8d5acf2b4a55e3244cee
     merged: true
   svgr:
-    status: running
+    status: completed
     issue: 50
-    pullRequest: null
+    pullRequest: 51
     branch: init/svgr/#50
-    commit: null
-    merged: false
+    commit: 02bc9b4de72c91bc14f305af176d3683029815a3
+    merged: true
   design-system:
     status: pending
     issue: null
@@ -112,6 +113,7 @@ github:
     router-absolute-path: 45
     tanstack-query: 47
     http-client: 49
+    svgr: 51
   branches:
     project-baseline: init/project-baseline/#32
     issue-pr-template: init/issue-pr-template/#34
@@ -125,7 +127,7 @@ github:
     svgr: init/svgr/#50
 lastRun:
   startedAt: 2026-06-18T16:29:40.542Z
-  finishedAt: null
+  finishedAt: 2026-06-18T16:29:54.651Z
   step: svgr
   error: null
 history:
@@ -338,3 +340,14 @@ history:
     step: svgr
     event: step:branch-created
     message: init/svgr/#50
+  - at: 2026-06-18T16:29:48.865Z
+    step: svgr
+    event: step:committed
+    message: 02bc9b4de72c91bc14f305af176d3683029815a3
+  - at: 2026-06-18T16:29:51.867Z
+    step: svgr
+    event: step:pull-request-created
+    message: "#51"
+  - at: 2026-06-18T16:29:54.651Z
+    step: svgr
+    event: step:completed
