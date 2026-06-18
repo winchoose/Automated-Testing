@@ -1,5 +1,5 @@
-status: running
-currentStep: design-system
+status: idle
+currentStep: null
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -11,6 +11,7 @@ completedSteps:
   - tanstack-query
   - http-client
   - svgr
+  - design-system
 failedSteps: []
 skippedSteps: []
 steps:
@@ -85,12 +86,12 @@ steps:
     commit: e0a9c7ae0795d1112ee285a0cb1b8b0d54fe467d
     merged: true
   design-system:
-    status: running
+    status: completed
     issue: 21
-    pullRequest: null
+    pullRequest: 22
     branch: init/design-system/#21
-    commit: null
-    merged: false
+    commit: 90776cf4ee789612884bb79cd63f3c701f05927d
+    merged: true
   env-config:
     status: pending
     issue: null
@@ -122,6 +123,7 @@ github:
     tanstack-query: 16
     http-client: 18
     svgr: 20
+    design-system: 22
   branches:
     project-baseline: init/project-baseline/#1
     issue-pr-template: init/issue-pr-template/#3
@@ -136,7 +138,7 @@ github:
     design-system: init/design-system/#21
 lastRun:
   startedAt: 2026-06-18T15:48:09.888Z
-  finishedAt: null
+  finishedAt: 2026-06-18T15:48:22.628Z
   step: design-system
   error: null
 history:
@@ -426,3 +428,14 @@ history:
     step: design-system
     event: step:branch-created
     message: init/design-system/#21
+  - at: 2026-06-18T15:48:16.730Z
+    step: design-system
+    event: step:committed
+    message: 90776cf4ee789612884bb79cd63f3c701f05927d
+  - at: 2026-06-18T15:48:19.819Z
+    step: design-system
+    event: step:pull-request-created
+    message: "#22"
+  - at: 2026-06-18T15:48:22.628Z
+    step: design-system
+    event: step:completed
