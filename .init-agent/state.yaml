@@ -1,5 +1,5 @@
-status: running
-currentStep: tanstack-query
+status: idle
+currentStep: null
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -8,6 +8,7 @@ completedSteps:
   - ci-cd
   - folder-structure
   - router-absolute-path
+  - tanstack-query
 failedSteps: []
 skippedSteps: []
 steps:
@@ -61,12 +62,12 @@ steps:
     commit: 1744bbe9f1988a63c34261952071c312f88e9c80
     merged: true
   tanstack-query:
-    status: running
+    status: completed
     issue: 15
-    pullRequest: null
+    pullRequest: 16
     branch: init/tanstack-query/#15
-    commit: null
-    merged: false
+    commit: 2bf2f941b5e4ecc7b6391c652ce57695a30ad01d
+    merged: true
   http-client:
     status: pending
     issue: null
@@ -113,6 +114,7 @@ github:
     ci-cd: 10
     folder-structure: 12
     router-absolute-path: 14
+    tanstack-query: 16
   branches:
     project-baseline: init/project-baseline/#1
     issue-pr-template: init/issue-pr-template/#3
@@ -124,7 +126,7 @@ github:
     tanstack-query: init/tanstack-query/#15
 lastRun:
   startedAt: 2026-06-18T15:47:20.999Z
-  finishedAt: null
+  finishedAt: 2026-06-18T15:47:32.966Z
   step: tanstack-query
   error: null
 history:
@@ -348,3 +350,14 @@ history:
   - at: 2026-06-18T15:47:21.000Z
     step: tanstack-query
     event: step:running
+  - at: 2026-06-18T15:47:25.818Z
+    step: tanstack-query
+    event: step:committed
+    message: 2bf2f941b5e4ecc7b6391c652ce57695a30ad01d
+  - at: 2026-06-18T15:47:29.774Z
+    step: tanstack-query
+    event: step:pull-request-created
+    message: "#16"
+  - at: 2026-06-18T15:47:32.966Z
+    step: tanstack-query
+    event: step:completed
