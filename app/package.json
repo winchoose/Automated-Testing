@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "build:icons": "tsx scripts/build-icons.ts"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
@@ -37,6 +38,8 @@
     "globals": "^16.0.0",
     "prettier-plugin-tailwindcss": "^0.6.0",
     "@types/node": "^22.0.0",
-    "@tanstack/react-query-devtools": "^5.0.0"
+    "@tanstack/react-query-devtools": "^5.0.0",
+    "@svgr/cli": "^8.0.0",
+    "tsx": "^4.0.0"
   }
 }
