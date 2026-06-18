@@ -1,5 +1,5 @@
-status: idle
-currentStep: null
+status: running
+currentStep: tanstack-query
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -61,10 +61,10 @@ steps:
     commit: 1744bbe9f1988a63c34261952071c312f88e9c80
     merged: true
   tanstack-query:
-    status: pending
-    issue: null
+    status: running
+    issue: 15
     pullRequest: null
-    branch: null
+    branch: init/tanstack-query/#15
     commit: null
     merged: false
   http-client:
@@ -104,6 +104,7 @@ github:
     ci-cd: 9
     folder-structure: 11
     router-absolute-path: 13
+    tanstack-query: 15
   pullRequests:
     project-baseline: 2
     issue-pr-template: 4
@@ -120,10 +121,11 @@ github:
     ci-cd: init/ci-cd/#9
     folder-structure: init/folder-structure/#11
     router-absolute-path: init/router-absolute-path/#13
+    tanstack-query: init/tanstack-query/#15
 lastRun:
-  startedAt: 2026-06-18T15:45:43.790Z
-  finishedAt: 2026-06-18T15:45:54.350Z
-  step: router-absolute-path
+  startedAt: 2026-06-18T15:47:20.999Z
+  finishedAt: null
+  step: tanstack-query
   error: null
 history:
   - at: 2026-06-18T06:39:35.030Z
@@ -322,3 +324,27 @@ history:
   - at: 2026-06-18T15:45:54.350Z
     step: router-absolute-path
     event: step:completed
+  - at: 2026-06-18T15:45:57.975Z
+    step: tanstack-query
+    event: step:running
+  - at: 2026-06-18T15:45:58.899Z
+    step: tanstack-query
+    event: step:issue-created
+    message: "#15"
+  - at: 2026-06-18T15:46:00.904Z
+    step: tanstack-query
+    event: step:branch-created
+    message: init/tanstack-query/#15
+  - at: 2026-06-18T15:46:04.582Z
+    step: tanstack-query
+    event: step:failed
+    message: |-
+      Verification failed: pnpm --dir app build
+      > automated-testing-app@0.0.0 build /Users/ohseungtaek/Documents/초기세팅 자동화/Automated-Testing/app
+      > tsc -b && vite build
+
+      src/app/providers/query-provider.tsx(10,20): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+       ELIFECYCLE  Command failed with exit code 2.
+  - at: 2026-06-18T15:47:21.000Z
+    step: tanstack-query
+    event: step:running
