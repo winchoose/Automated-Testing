@@ -32,8 +32,8 @@ inputs:
       - main
       - develop
   deploymentRepository:
-    owner: kimminna
-    name: 38-COLLABORATION-WEB-NAVER
+    owner: Automated-Testing-taek
+    name: Automated-Testing
     branches:
       - main
       - develop
