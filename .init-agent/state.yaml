@@ -1,5 +1,5 @@
-status: idle
-currentStep: null
+status: running
+currentStep: design-system
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -85,10 +85,10 @@ steps:
     commit: e0a9c7ae0795d1112ee285a0cb1b8b0d54fe467d
     merged: true
   design-system:
-    status: pending
-    issue: null
+    status: running
+    issue: 21
     pullRequest: null
-    branch: null
+    branch: init/design-system/#21
     commit: null
     merged: false
   env-config:
@@ -110,6 +110,7 @@ github:
     tanstack-query: 15
     http-client: 17
     svgr: 19
+    design-system: 21
   pullRequests:
     project-baseline: 2
     issue-pr-template: 4
@@ -132,10 +133,11 @@ github:
     tanstack-query: init/tanstack-query/#15
     http-client: init/http-client/#17
     svgr: init/svgr/#19
+    design-system: init/design-system/#21
 lastRun:
-  startedAt: 2026-06-18T15:47:51.978Z
-  finishedAt: 2026-06-18T15:48:07.064Z
-  step: svgr
+  startedAt: 2026-06-18T15:48:09.888Z
+  finishedAt: null
+  step: design-system
   error: null
 history:
   - at: 2026-06-18T06:39:35.030Z
@@ -413,3 +415,14 @@ history:
   - at: 2026-06-18T15:48:07.064Z
     step: svgr
     event: step:completed
+  - at: 2026-06-18T15:48:09.888Z
+    step: design-system
+    event: step:running
+  - at: 2026-06-18T15:48:10.642Z
+    step: design-system
+    event: step:issue-created
+    message: "#21"
+  - at: 2026-06-18T15:48:12.483Z
+    step: design-system
+    event: step:branch-created
+    message: init/design-system/#21
