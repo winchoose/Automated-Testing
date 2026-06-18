@@ -1,11 +1,12 @@
-status: running
-currentStep: folder-structure
+status: idle
+currentStep: null
 completedSteps:
   - project-baseline
   - issue-pr-template
   - react
   - eslint-prettier
   - ci-cd
+  - folder-structure
 failedSteps: []
 skippedSteps: []
 steps:
@@ -45,12 +46,12 @@ steps:
     commit: 6c6464f70715220a3d18667957245d1556f6941d
     merged: true
   folder-structure:
-    status: running
+    status: completed
     issue: 11
-    pullRequest: null
+    pullRequest: 12
     branch: init/folder-structure/#11
-    commit: null
-    merged: false
+    commit: d68220c32c7806c01e6938a745bbe56a8b525c18
+    merged: true
   router-absolute-path:
     status: pending
     issue: null
@@ -107,6 +108,7 @@ github:
     react: 6
     eslint-prettier: 8
     ci-cd: 10
+    folder-structure: 12
   branches:
     project-baseline: init/project-baseline/#1
     issue-pr-template: init/issue-pr-template/#3
@@ -116,7 +118,7 @@ github:
     folder-structure: init/folder-structure/#11
 lastRun:
   startedAt: 2026-06-18T15:44:08.578Z
-  finishedAt: null
+  finishedAt: 2026-06-18T15:44:17.796Z
   step: folder-structure
   error: null
 history:
@@ -268,3 +270,14 @@ history:
   - at: 2026-06-18T15:44:08.578Z
     step: folder-structure
     event: step:running
+  - at: 2026-06-18T15:44:12.044Z
+    step: folder-structure
+    event: step:committed
+    message: d68220c32c7806c01e6938a745bbe56a8b525c18
+  - at: 2026-06-18T15:44:14.951Z
+    step: folder-structure
+    event: step:pull-request-created
+    message: "#12"
+  - at: 2026-06-18T15:44:17.796Z
+    step: folder-structure
+    event: step:completed
