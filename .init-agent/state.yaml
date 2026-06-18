@@ -1,5 +1,5 @@
-status: idle
-currentStep: null
+status: running
+currentStep: design-system
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -85,10 +85,10 @@ steps:
     commit: 02bc9b4de72c91bc14f305af176d3683029815a3
     merged: true
   design-system:
-    status: pending
-    issue: null
+    status: running
+    issue: 52
     pullRequest: null
-    branch: null
+    branch: init/design-system/#52
     commit: null
     merged: false
 github:
@@ -103,6 +103,7 @@ github:
     tanstack-query: 46
     http-client: 48
     svgr: 50
+    design-system: 52
   pullRequests:
     project-baseline: 33
     issue-pr-template: 35
@@ -125,10 +126,11 @@ github:
     tanstack-query: init/tanstack-query/#46
     http-client: init/http-client/#48
     svgr: init/svgr/#50
+    design-system: init/design-system/#52
 lastRun:
-  startedAt: 2026-06-18T16:29:40.542Z
-  finishedAt: 2026-06-18T16:29:54.651Z
-  step: svgr
+  startedAt: 2026-06-18T16:29:57.237Z
+  finishedAt: null
+  step: design-system
   error: null
 history:
   - at: 2026-06-18T16:27:35.280Z
@@ -351,3 +353,14 @@ history:
   - at: 2026-06-18T16:29:54.651Z
     step: svgr
     event: step:completed
+  - at: 2026-06-18T16:29:57.237Z
+    step: design-system
+    event: step:running
+  - at: 2026-06-18T16:29:57.931Z
+    step: design-system
+    event: step:issue-created
+    message: "#52"
+  - at: 2026-06-18T16:29:59.795Z
+    step: design-system
+    event: step:branch-created
+    message: init/design-system/#52
