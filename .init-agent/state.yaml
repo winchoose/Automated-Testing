@@ -1,5 +1,5 @@
-status: idle
-currentStep: null
+status: running
+currentStep: router-absolute-path
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -53,10 +53,10 @@ steps:
     commit: d68220c32c7806c01e6938a745bbe56a8b525c18
     merged: true
   router-absolute-path:
-    status: pending
-    issue: null
+    status: running
+    issue: 13
     pullRequest: null
-    branch: null
+    branch: init/router-absolute-path/#13
     commit: null
     merged: false
   tanstack-query:
@@ -102,6 +102,7 @@ github:
     eslint-prettier: 7
     ci-cd: 9
     folder-structure: 11
+    router-absolute-path: 13
   pullRequests:
     project-baseline: 2
     issue-pr-template: 4
@@ -116,10 +117,11 @@ github:
     eslint-prettier: init/eslint-prettier/#7
     ci-cd: init/ci-cd/#9
     folder-structure: init/folder-structure/#11
+    router-absolute-path: init/router-absolute-path/#13
 lastRun:
-  startedAt: 2026-06-18T15:44:08.578Z
-  finishedAt: 2026-06-18T15:44:17.796Z
-  step: folder-structure
+  startedAt: 2026-06-18T15:45:43.790Z
+  finishedAt: null
+  step: router-absolute-path
   error: null
 history:
   - at: 2026-06-18T06:39:35.030Z
@@ -281,3 +283,29 @@ history:
   - at: 2026-06-18T15:44:17.796Z
     step: folder-structure
     event: step:completed
+  - at: 2026-06-18T15:44:20.486Z
+    step: router-absolute-path
+    event: step:running
+  - at: 2026-06-18T15:44:21.272Z
+    step: router-absolute-path
+    event: step:issue-created
+    message: "#13"
+  - at: 2026-06-18T15:44:23.026Z
+    step: router-absolute-path
+    event: step:branch-created
+    message: init/router-absolute-path/#13
+  - at: 2026-06-18T15:44:25.693Z
+    step: router-absolute-path
+    event: step:failed
+    message: |-
+      Verification failed: pnpm --dir app format:check
+      > automated-testing-app@0.0.0 format:check /Users/ohseungtaek/Documents/초기세팅 자동화/Automated-Testing/app
+      > prettier . --check
+
+      Checking formatting...
+       ELIFECYCLE  Command failed with exit code 1.
+      [warn] pnpm-lock.yaml
+      [warn] Code style issues found in the above file. Run Prettier with --write to fix.
+  - at: 2026-06-18T15:45:43.790Z
+    step: router-absolute-path
+    event: step:running
