@@ -16,7 +16,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  {ignores: ['dist']},
+  { ignores: ['dist'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -32,14 +32,17 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
       'jsx-a11y/alt-text': 'warn',
     },
-  }
+  },
 );`
     )
   );
-  changedFiles.push(await writeText(config.repoRoot, 'app/.prettierrc', `{"singleQuote": true, "semi": true}`));
+  changedFiles.push(await writeText(config.repoRoot, 'app/.prettierrc', `{ "singleQuote": true, "semi": true }`));
   changedFiles.push(await writeText(config.repoRoot, 'app/.prettierignore', `dist
 node_modules
 coverage
@@ -76,4 +79,3 @@ coverage
     message: 'ESLint and Prettier were configured for app/.',
   };
 };
-

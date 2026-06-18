@@ -37,12 +37,22 @@ export const executeReact: StepExecutor = async (config, step) => {
     ),
     writeText(
       config.repoRoot,
+      'app/.gitignore',
+      `node_modules
+dist
+.env
+.env.*
+!.env.example
+`
+    ),
+    writeText(
+      config.repoRoot,
       'app/tsconfig.json',
       `{
   "files": [],
   "references": [
-    {"path": "./tsconfig.app.json"},
-    {"path": "./tsconfig.node.json"}
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }`
     ),
@@ -94,7 +104,7 @@ export const executeReact: StepExecutor = async (config, step) => {
     writeText(
       config.repoRoot,
       'app/vite.config.ts',
-      `import {defineConfig} from 'vite';
+      `import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
@@ -104,14 +114,14 @@ export default defineConfig({
     writeText(
       config.repoRoot,
       'app/src/main.tsx',
-      `import {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
+      `import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );`
     ),
     writeText(
@@ -133,4 +143,3 @@ createRoot(document.getElementById('root')!).render(
     message: 'React Vite TypeScript app was generated in app/.',
   };
 };
-
