@@ -10,6 +10,8 @@
     "dev": "tsx src/cli.ts",
     "doctor": "tsx src/cli.ts doctor",
     "status": "tsx src/cli.ts status",
+    "context": "tsx src/cli.ts context",
+    "next": "tsx src/cli.ts next",
     "next:dry-run": "tsx src/cli.ts next --dry-run",
     "typecheck": "tsc --noEmit"
   },

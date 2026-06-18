@@ -13,8 +13,47 @@ export type WorkflowConfig = {
     stateFile: string;
   };
   github: {
+    enabled: boolean;
+    issue: {
+      create: boolean;
+      titlePattern: string;
+      labelsFromStep: boolean;
+      body: {
+        includeSummary: boolean;
+        includeTasks: boolean;
+        includeAcceptanceCriteria: boolean;
+        includeReferences: boolean;
+      };
+    };
     branch: {
+      create: boolean;
+      namePattern: string;
       baseBranch: string;
+    };
+    commit: {
+      create: boolean;
+      messagePattern: string;
+    };
+    pullRequest: {
+      create: boolean;
+      draft: boolean;
+      titlePattern: string;
+      labelsFromStep: boolean;
+      body: {
+        includeSummary: boolean;
+        includeChanges: boolean;
+        includeVerification: boolean;
+        includeReferences: boolean;
+        includeRelatedIssue: boolean;
+      };
+    };
+    merge: {
+      enabled: boolean;
+      strategy: string;
+      waitForChecks: boolean;
+      deleteBranchAfterMerge: boolean;
+      stopIfChecksFail: boolean;
+      requireHumanApproval: boolean;
     };
   };
   steps: WorkflowStep[];
@@ -36,11 +75,23 @@ export type StepConfig = {
   title: string;
   order: number;
   enabled: boolean;
+  summary?: string;
+  labels?: string[];
   dependsOn: string[];
+  decision?: Record<string, unknown>;
+  inputs?: Record<string, unknown>;
   references?: Array<{
     path: string;
+    type?: string;
     required?: boolean;
   }>;
+  tasks?: string[];
+  acceptanceCriteria?: string[];
+  files?: {
+    expected?: string[];
+    avoid?: string[];
+  };
+  verification?: string[];
 };
 
 export type StepState = {
@@ -59,4 +110,21 @@ export type AgentState = {
   failedSteps: string[];
   skippedSteps: string[];
   steps: Record<string, StepState>;
+  github?: {
+    issues: Record<string, number>;
+    pullRequests: Record<string, number>;
+    branches: Record<string, string>;
+  };
+  lastRun?: {
+    startedAt: string | null;
+    finishedAt: string | null;
+    step: string | null;
+    error: string | null;
+  };
+  history?: Array<{
+    at: string;
+    step: string;
+    event: string;
+    message?: string;
+  }>;
 };
