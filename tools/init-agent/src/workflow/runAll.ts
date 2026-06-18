@@ -7,6 +7,7 @@ import {getCurrentStep} from './getCurrentStep.js';
 import {getNextStep} from './getNextStep.js';
 import {mergeCurrentStep} from './mergeCurrentStep.js';
 import {startNextStep} from './startNextStep.js';
+import {syncStateToBaseBranch} from './syncStateToBaseBranch.js';
 
 export type RunAllPlan = {
   mode: 'needs-work' | 'ready-for-next' | 'complete';
@@ -140,6 +141,6 @@ export async function runAll(startDirectory = process.cwd()): Promise<RunAllResu
       message: 'Merging the PR and marking the step completed.',
     });
     await mergeCurrentStep(config);
+    await syncStateToBaseBranch(config, step.id);
   }
 }
-
