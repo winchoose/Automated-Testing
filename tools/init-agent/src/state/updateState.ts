@@ -135,6 +135,11 @@ export function markStepCompleted(state: AgentState, stepId: string, options?: {
   nextState.currentStep = null;
   nextState.completedSteps = appendUnique(nextState.completedSteps, stepId);
   nextState.failedSteps = removeItem(nextState.failedSteps, stepId);
+  nextState.status = Object.values(nextState.steps).every((currentStep) =>
+    ['completed', 'skipped'].includes(currentStep.status)
+  )
+    ? 'completed'
+    : 'idle';
 
   if (nextState.lastRun?.step === stepId) {
     nextState.lastRun.finishedAt = now();
@@ -166,4 +171,3 @@ export function markStepFailed(state: AgentState, stepId: string, error: string)
 
   return nextState;
 }
-

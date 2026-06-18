@@ -14,6 +14,7 @@ runtime:
   buildTool: vite
   packageManager: pnpm
   nodeVersion: "20"
+  appDirectory: app
 
 deployment:
   provider: vercel

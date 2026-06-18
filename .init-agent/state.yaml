@@ -1,16 +1,19 @@
-status: running
-currentStep: project-baseline
-completedSteps: []
+status: idle
+currentStep: null
+
+completedSteps:
+  - project-baseline
 failedSteps: []
 skippedSteps: []
+
 steps:
   project-baseline:
-    status: running
+    status: completed
     issue: 1
-    pullRequest: null
+    pullRequest: 2
     branch: init/project-baseline/#1
-    commit: null
-    merged: false
+    commit: df16d03616631d8c6be3ef8a933ea41e228eb891
+    merged: true
   issue-pr-template:
     status: pending
     issue: null
@@ -88,17 +91,21 @@ steps:
     branch: null
     commit: null
     merged: false
+
 github:
   issues:
     project-baseline: 1
-  pullRequests: {}
+  pullRequests:
+    project-baseline: 2
   branches:
     project-baseline: init/project-baseline/#1
+
 lastRun:
   startedAt: 2026-06-18T06:39:35.029Z
-  finishedAt: null
+  finishedAt: 2026-06-18T07:12:40.396Z
   step: project-baseline
   error: null
+
 history:
   - at: 2026-06-18T06:39:35.030Z
     step: project-baseline
@@ -111,3 +118,14 @@ history:
     step: project-baseline
     event: step:branch-created
     message: init/project-baseline/#1
+  - at: 2026-06-18T06:53:46.117Z
+    step: project-baseline
+    event: step:committed
+    message: df16d03616631d8c6be3ef8a933ea41e228eb891
+  - at: 2026-06-18T06:53:50.160Z
+    step: project-baseline
+    event: step:pull-request-created
+    message: "#2"
+  - at: 2026-06-18T07:12:40.400Z
+    step: project-baseline
+    event: step:completed

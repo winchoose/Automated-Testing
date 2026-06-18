@@ -14,9 +14,20 @@ export function formatStatus(state: AgentState) {
     lines.push(`- ${id}`);
   }
   lines.push('');
+  lines.push(`running: ${byStatus('running').length}`);
+  for (const id of byStatus('running')) {
+    const step = state.steps[id];
+    lines.push(
+      `- ${id} issue=${step.issue ?? 'none'} pr=${step.pullRequest ?? 'none'} branch=${step.branch ?? 'none'}`
+    );
+  }
+  lines.push('');
   lines.push(`completed: ${state.completedSteps.length}`);
   for (const id of state.completedSteps) {
-    lines.push(`- ${id}`);
+    const step = state.steps[id];
+    lines.push(
+      `- ${id} issue=${step?.issue ?? 'none'} pr=${step?.pullRequest ?? 'none'} merged=${step?.merged ?? false}`
+    );
   }
   lines.push('');
   lines.push(`failed: ${state.failedSteps.length}`);

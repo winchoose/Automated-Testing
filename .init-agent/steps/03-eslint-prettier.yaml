@@ -2,7 +2,7 @@ id: eslint-prettier
 title: "Init: ESLint / Prettier 세팅"
 order: 3
 enabled: true
-summary: "React, Vite, TypeScript 프로젝트에 코드 품질 검사와 포맷팅 기준을 설정한다."
+summary: "app 폴더의 React, Vite, TypeScript 프로젝트에 코드 품질 검사와 포맷팅 기준을 설정한다."
 
 labels:
   - Init
@@ -24,6 +24,7 @@ inputs:
   framework: react
   buildTool: vite
   packageManager: pnpm
+  appDirectory: app
   eslint:
     configType: flat-config
     configFile: eslint.config.js
@@ -72,29 +73,29 @@ tasks:
   - "React, React Hooks, React Refresh, TypeScript, JSX accessibility 관련 ESLint 설정을 반영한다."
   - "Prettier 설정 파일을 생성한다."
   - "Prettier ignore 파일을 생성한다."
-  - "package.json에 lint, lint:fix, format, format:check scripts를 추가한다."
+  - "app/package.json에 lint, lint:fix, format, format:check scripts를 추가한다."
   - "references/eslint-prettier와 conventions 문서를 참고해 설정을 작성한다."
 
 acceptanceCriteria:
-  - "eslint.config.js 파일이 존재한다."
-  - ".prettierrc 파일이 존재한다."
-  - ".prettierignore 파일이 존재한다."
-  - "package.json에 lint script가 존재한다."
-  - "package.json에 format:check script가 존재한다."
-  - "pnpm lint 명령이 통과한다."
-  - "pnpm format:check 명령이 통과한다."
+  - "app/eslint.config.js 파일이 존재한다."
+  - "app/.prettierrc 파일이 존재한다."
+  - "app/.prettierignore 파일이 존재한다."
+  - "app/package.json에 lint script가 존재한다."
+  - "app/package.json에 format:check script가 존재한다."
+  - "pnpm --dir app lint 명령이 통과한다."
+  - "pnpm --dir app format:check 명령이 통과한다."
 
 files:
   expected:
-    - eslint.config.js
-    - .prettierrc
-    - .prettierignore
-    - package.json
+    - app/eslint.config.js
+    - app/.prettierrc
+    - app/.prettierignore
+    - app/package.json
   avoid:
     - .github/workflows
 
 verification:
-  - "pnpm install"
-  - "pnpm lint"
-  - "pnpm format:check"
-  - "pnpm build"
+  - "pnpm --dir app install"
+  - "pnpm --dir app lint"
+  - "pnpm --dir app format:check"
+  - "pnpm --dir app build"

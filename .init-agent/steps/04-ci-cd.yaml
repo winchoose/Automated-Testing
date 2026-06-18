@@ -51,10 +51,12 @@ inputs:
       - PERSONAL_REPO_PAT
     nodeVersion: "20"
     pnpmVersion: "10"
+    workingDirectory: app
   vercel:
     integration: git
     productionBranch: main
     previewBranch: develop
+    rootDirectory: app
     installCommand: pnpm install --frozen-lockfile
     buildCommand: pnpm build
     outputDirectory: dist
@@ -65,9 +67,10 @@ inputs:
     create: true
     path: vercel.json
     framework: vite
-    buildCommand: pnpm build
-    outputDirectory: dist
-    installCommand: pnpm install --frozen-lockfile
+    rootDirectory: app
+    buildCommand: pnpm --dir app build
+    outputDirectory: app/dist
+    installCommand: pnpm --dir app install --frozen-lockfile
 
 references:
   - path: references/ci-cd/ci.yaml
@@ -79,7 +82,7 @@ references:
 
 tasks:
   - "PR과 main/develop push를 트리거로 하는 CI workflow를 생성한다."
-  - "CI workflow에서 pnpm install, format check, lint, build를 실행한다."
+  - "CI workflow에서 app 폴더 기준으로 pnpm install, format check, lint, build를 실행한다."
   - "main/develop push를 트리거로 하는 CD workflow를 생성한다."
   - "CD workflow에서 Vercel에 연결된 개인 repo의 동일 브랜치로 코드를 push한다."
   - "배포용 repo 정보는 inputs.deploymentRepository 값을 기준으로 설정한다."
@@ -91,7 +94,7 @@ acceptanceCriteria:
   - ".github/workflows/ci.yml 파일이 존재한다."
   - ".github/workflows/cd.yml 파일이 존재한다."
   - "CI workflow는 pull_request와 main/develop push에서 실행된다."
-  - "CI workflow는 pnpm install, format check, lint, build를 실행한다."
+  - "CI workflow는 app 폴더 기준으로 pnpm install, format check, lint, build를 실행한다."
   - "CD workflow는 main/develop push 또는 workflow_dispatch에서 실행된다."
   - "CD workflow는 PERSONAL_REPO_PAT secret을 사용해 배포용 repo로 push한다."
   - "vercel.json 파일이 존재한다."
@@ -110,5 +113,5 @@ verification:
   - "test -f .github/workflows/ci.yml"
   - "test -f .github/workflows/cd.yml"
   - "test -f vercel.json"
-  - "pnpm install"
-  - "pnpm build"
+  - "pnpm --dir app install"
+  - "pnpm --dir app build"

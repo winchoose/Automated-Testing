@@ -7,6 +7,8 @@ import {formatStatus} from './state/formatStatus.js';
 import {markStepRunning} from './state/updateState.js';
 import {finishCurrentStep} from './workflow/finishCurrentStep.js';
 import {getNextStep} from './workflow/getNextStep.js';
+import {mergeCurrentStep} from './workflow/mergeCurrentStep.js';
+import {planRunAll} from './workflow/runAll.js';
 import {startNextStep} from './workflow/startNextStep.js';
 import {validateWorkflow} from './workflow/validateWorkflow.js';
 
@@ -120,6 +122,32 @@ async function finish() {
   console.log('state.yaml updated.');
 }
 
+async function merge() {
+  const config = await loadAgentConfig();
+  const result = await mergeCurrentStep(config);
+
+  console.log('merged current step:');
+  console.log(`- step: ${result.stepId}`);
+  console.log(`- pull request: #${result.pullRequestNumber}`);
+  console.log(`- merge sha: ${result.mergeSha}`);
+  console.log(`- message: ${result.message}`);
+  console.log('');
+  console.log('state.yaml updated.');
+}
+
+async function runAll() {
+  const config = await loadAgentConfig();
+  const plan = planRunAll(config);
+
+  console.log('run-all plan:');
+  console.log(`- mode: ${plan.mode}`);
+  console.log(`- message: ${plan.message}`);
+  console.log(`- current step: ${plan.currentStepId ?? 'none'}`);
+  console.log(`- next step: ${plan.nextStepId ?? 'none'}`);
+  console.log('');
+  console.log('Full automatic step execution will be connected after the step executor is implemented.');
+}
+
 function help() {
   console.log(`init-agent
 
@@ -130,6 +158,8 @@ Commands:
   next --dry-run  Show the next runnable step
   next            Create the issue and branch for the next runnable step
   finish          Verify, commit, push, and create a PR for the running step
+  merge           Merge the running step PR and mark the step completed
+  run-all         Show the current run-all continuation plan
 `);
 }
 
@@ -144,6 +174,10 @@ try {
     await next();
   } else if (command === 'finish') {
     await finish();
+  } else if (command === 'merge') {
+    await merge();
+  } else if (command === 'run-all') {
+    await runAll();
   } else {
     help();
   }

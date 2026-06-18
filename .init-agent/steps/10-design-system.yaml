@@ -2,7 +2,7 @@ id: design-system
 title: "Init: 디자인 시스템 및 global style 세팅"
 order: 10
 enabled: true
-summary: "스타일 라이브러리를 선택하고, 컬러/폰트 토큰과 global style을 프로젝트에 반영한다."
+summary: "app 폴더에 스타일 라이브러리를 선택하고, 컬러/폰트 토큰과 global style을 반영한다."
 
 labels:
   - Init
@@ -31,8 +31,8 @@ inputs:
       - references/design-system/font-table.png
       - references/design-system/typography.md
   globalStyle:
-    cssFile: src/shared/styles/global.css
-    importLocation: src/main.tsx
+    cssFile: app/src/shared/styles/global.css
+    importLocation: app/src/main.tsx
     includeReset: true
     includeBodyBaseStyle: true
     includeCssVariables: true
@@ -42,11 +42,11 @@ inputs:
     configFile: optional
     postcssConfigFile: optional
     content:
-      - ./index.html
-      - ./src/**/*.{ts,tsx}
+      - ./app/index.html
+      - ./app/src/**/*.{ts,tsx}
   vanillaExtract:
-    themeFile: src/shared/styles/theme.css.ts
-    globalStyleFile: src/shared/styles/global.css.ts
+    themeFile: app/src/shared/styles/theme.css.ts
+    globalStyleFile: app/src/shared/styles/global.css.ts
   fonts:
     strategy: css-font-face-or-external-import
     cssVariables: true
@@ -93,7 +93,7 @@ tasks:
   - "references/design-system과 conventions 문서를 참고해 토큰 네이밍과 적용 범위를 조정한다."
 
 acceptanceCriteria:
-  - "선택한 스타일 라이브러리 의존성이 package.json에 추가된다."
+  - "선택한 스타일 라이브러리 의존성이 app/package.json에 추가된다."
   - "global style 파일이 존재하고 앱 엔트리에 import된다."
   - "모바일 웹 기준 root width와 viewport height 스타일이 반영된다."
   - "global style에는 reset 또는 기본 normalize 규칙이 포함된다."
@@ -101,17 +101,17 @@ acceptanceCriteria:
   - "컬러 토큰이 코드에 반영된다."
   - "폰트 토큰 또는 font-face/import 규칙이 코드에 반영된다."
   - "기본 body 스타일이 설정된다."
-  - "pnpm build 명령이 통과한다."
+  - "pnpm --dir app build 명령이 통과한다."
 
 files:
   expected:
-    - src/shared/styles/global.css
-    - package.json
+    - app/src/shared/styles/global.css
+    - app/package.json
   avoid:
     - .github/workflows
 
 verification:
-  - "pnpm install"
-  - "pnpm lint"
-  - "pnpm format:check"
-  - "pnpm build"
+  - "pnpm --dir app install"
+  - "pnpm --dir app lint"
+  - "pnpm --dir app format:check"
+  - "pnpm --dir app build"

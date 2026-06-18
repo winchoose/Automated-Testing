@@ -13,6 +13,8 @@
     "context": "tsx src/cli.ts context",
     "next": "tsx src/cli.ts next",
     "finish": "tsx src/cli.ts finish",
+    "merge": "tsx src/cli.ts merge",
+    "run-all": "tsx src/cli.ts run-all",
     "next:dry-run": "tsx src/cli.ts next --dry-run",
     "typecheck": "tsc --noEmit"
   },

@@ -19,6 +19,19 @@ type GitHubRefResponse = {
 type GitHubPullRequestResponse = {
   number: number;
   html_url: string;
+  state: string;
+  merged: boolean;
+  mergeable: boolean | null;
+  mergeable_state: string;
+  head: {
+    sha: string;
+  };
+};
+
+type GitHubMergeResponse = {
+  sha: string;
+  merged: boolean;
+  message: string;
 };
 
 export type CreateIssueInput = {
@@ -33,6 +46,13 @@ export type CreatePullRequestInput = {
   head: string;
   base: string;
   draft: boolean;
+};
+
+export type MergePullRequestInput = {
+  pullRequestNumber: number;
+  commitTitle: string;
+  commitMessage?: string;
+  mergeMethod: 'merge' | 'squash' | 'rebase';
 };
 
 export class GitHubClient {
@@ -93,6 +113,26 @@ export class GitHubClient {
     });
   }
 
+  async getPullRequest(pullRequestNumber: number) {
+    return this.request<GitHubPullRequestResponse>(
+      `/repos/${this.owner}/${this.repo}/pulls/${pullRequestNumber}`
+    );
+  }
+
+  async mergePullRequest(input: MergePullRequestInput) {
+    return this.request<GitHubMergeResponse>(
+      `/repos/${this.owner}/${this.repo}/pulls/${input.pullRequestNumber}/merge`,
+      {
+        method: 'PUT',
+        body: JSON.stringify({
+          commit_title: input.commitTitle,
+          commit_message: input.commitMessage,
+          merge_method: input.mergeMethod,
+        }),
+      }
+    );
+  }
+
   private async request<T>(path: string, init: RequestInit = {}) {
     const response = await fetch(`${this.apiBaseUrl}${path}`, {
       ...init,
@@ -113,4 +153,3 @@ export class GitHubClient {
     return response.json() as Promise<T>;
   }
 }
-

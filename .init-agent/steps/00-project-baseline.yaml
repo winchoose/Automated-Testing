@@ -22,7 +22,7 @@ inputs:
   expectedNodeVersion: "20"
   initialState:
     hasReadme: true
-    hasPackageJson: false
+    hasAppPackageJson: false
     hasInitAgent: true
 
 references: []
@@ -30,7 +30,7 @@ references: []
 tasks:
   - "현재 Git branch와 working tree 상태를 확인한다."
   - "README.md 존재 여부를 확인한다."
-  - "package.json 존재 여부를 확인한다."
+  - "app/package.json 존재 여부를 확인한다."
   - "프로젝트에서 사용할 package manager와 Node.js 기준 버전을 확인한다."
   - ".init-agent 설정 폴더가 존재하는지 확인한다."
   - "이후 step들이 참조할 baseline 정보를 기록한다."
@@ -39,7 +39,7 @@ acceptanceCriteria:
   - "기존 GitHub repo를 기준으로 자동화를 시작할 수 있다."
   - "현재 default branch가 확인된다."
   - "README.md 존재 여부가 확인된다."
-  - "package.json이 아직 없다면 React 초기세팅 단계에서 생성 대상으로 처리된다."
+  - "app/package.json이 아직 없다면 React 초기세팅 단계에서 생성 대상으로 처리된다."
   - ".init-agent 폴더가 자동화 지시서 위치로 사용된다."
 
 files:

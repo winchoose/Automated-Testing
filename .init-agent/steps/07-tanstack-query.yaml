@@ -2,7 +2,7 @@ id: tanstack-query
 title: "Init: TanStack Query 세팅"
 order: 7
 enabled: true
-summary: "서버 상태 관리를 위해 TanStack Query를 설정하고 QueryClientProvider를 앱 provider 계층에 연결한다."
+summary: "app 폴더의 서버 상태 관리를 위해 TanStack Query를 설정하고 QueryClientProvider를 앱 provider 계층에 연결한다."
 
 labels:
   - Init
@@ -25,9 +25,9 @@ inputs:
   library: "@tanstack/react-query"
   devtools: true
   provider:
-    queryClientFile: src/app/providers/query-client.ts
-    providerFile: src/app/providers/query-provider.tsx
-    providerLocation: src/app/App.tsx
+    queryClientFile: app/src/app/providers/query-client.ts
+    providerFile: app/src/app/providers/query-provider.tsx
+    providerLocation: app/src/app/App.tsx
   defaultOptions:
     queries:
       staleTime: 60000
@@ -57,22 +57,22 @@ tasks:
   - "references/tanstack-query와 conventions 문서를 참고해 query key와 배치 규칙을 반영한다."
 
 acceptanceCriteria:
-  - "@tanstack/react-query 의존성이 package.json에 추가된다."
+  - "@tanstack/react-query 의존성이 app/package.json에 추가된다."
   - "QueryClient 생성 파일이 존재한다."
   - "QueryClientProvider가 앱에 연결된다."
   - "query key 규칙이 references 또는 step inputs에 명시된다."
-  - "pnpm build 명령이 통과한다."
+  - "pnpm --dir app build 명령이 통과한다."
 
 files:
   expected:
-    - src/app/providers/query-client.ts
-    - src/app/providers/query-provider.tsx
-    - package.json
+    - app/src/app/providers/query-client.ts
+    - app/src/app/providers/query-provider.tsx
+    - app/package.json
   avoid:
     - .github/workflows
 
 verification:
-  - "pnpm install"
-  - "pnpm lint"
-  - "pnpm format:check"
-  - "pnpm build"
+  - "pnpm --dir app install"
+  - "pnpm --dir app lint"
+  - "pnpm --dir app format:check"
+  - "pnpm --dir app build"

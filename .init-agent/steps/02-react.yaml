@@ -2,7 +2,7 @@ id: react
 title: "Init: React 초기세팅"
 order: 2
 enabled: true
-summary: "빈 기존 repo에 React 기반 프론트엔드 프로젝트의 기본 실행 환경을 구성한다."
+summary: "빈 기존 repo의 app 폴더에 React 기반 프론트엔드 프로젝트의 기본 실행 환경을 구성한다."
 
 labels:
   - Init
@@ -25,19 +25,20 @@ inputs:
   language: typescript
   packageManager: pnpm
   nodeVersion: "20"
-  appDirectory: "."
+  appDirectory: app
   sourceDirectory: src
   creation:
     strategy: temporary-vite-template
-    command: "pnpm create vite@latest init-agent-vite-temp --template react-ts"
-    mergeInto: "."
+    command: "pnpm create vite@latest app --template react-ts"
+    mergeInto: app
     preserveExisting:
       - README.md
       - .init-agent
+      - tools
   entryFiles:
-    html: index.html
-    main: src/main.tsx
-    app: src/App.tsx
+    html: app/index.html
+    main: app/src/main.tsx
+    app: app/src/App.tsx
   scripts:
     dev: vite
     build: tsc -b && vite build
@@ -55,34 +56,34 @@ inputs:
 references: []
 
 tasks:
-  - "Vite 기반 React TypeScript 프로젝트를 구성한다."
-  - "package.json을 생성하고 pnpm 기준 scripts를 등록한다."
+  - "app 폴더에 Vite 기반 React TypeScript 프로젝트를 구성한다."
+  - "app/package.json을 생성하고 pnpm 기준 scripts를 등록한다."
   - "TypeScript 설정 파일을 생성한다."
-  - "index.html, src/main.tsx, src/App.tsx 기본 엔트리 파일을 생성한다."
+  - "app/index.html, app/src/main.tsx, app/src/App.tsx 기본 엔트리 파일을 생성한다."
   - "React 실행에 필요한 기본 의존성을 설치한다."
   - "README.md에 로컬 실행 방법을 반영한다."
 
 acceptanceCriteria:
-  - "package.json이 존재한다."
+  - "app/package.json이 존재한다."
   - "React, React DOM, Vite, TypeScript 의존성이 설정된다."
-  - "src/main.tsx와 src/App.tsx가 존재한다."
-  - "pnpm dev 명령으로 개발 서버를 실행할 수 있다."
-  - "pnpm build 명령이 통과한다."
+  - "app/src/main.tsx와 app/src/App.tsx가 존재한다."
+  - "pnpm --dir app dev 명령으로 개발 서버를 실행할 수 있다."
+  - "pnpm --dir app build 명령이 통과한다."
 
 files:
   expected:
-    - package.json
-    - pnpm-lock.yaml
-    - index.html
-    - tsconfig.json
-    - tsconfig.app.json
-    - tsconfig.node.json
-    - vite.config.ts
-    - src/main.tsx
-    - src/App.tsx
+    - app/package.json
+    - app/pnpm-lock.yaml
+    - app/index.html
+    - app/tsconfig.json
+    - app/tsconfig.app.json
+    - app/tsconfig.node.json
+    - app/vite.config.ts
+    - app/src/main.tsx
+    - app/src/App.tsx
   avoid:
     - .github/workflows
 
 verification:
-  - "pnpm install"
-  - "pnpm build"
+  - "pnpm --dir app install"
+  - "pnpm --dir app build"

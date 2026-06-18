@@ -2,7 +2,7 @@ id: router-absolute-path
 title: "Init: 라우터 및 절대경로 설정"
 order: 6
 enabled: true
-summary: "React Router 기반 라우팅 구조와 Vite/TypeScript 절대경로 alias를 설정한다."
+summary: "app 폴더의 React Router 기반 라우팅 구조와 Vite/TypeScript 절대경로 alias를 설정한다."
 
 labels:
   - Init
@@ -26,27 +26,27 @@ inputs:
     api: createBrowserRouter
     routingType: browser-router
     routeDefinitionStyle: object-array
-    routeConfigFile: src/app/router/router.tsx
-    providerLocation: src/app/App.tsx
+    routeConfigFile: app/src/app/router/router.tsx
+    providerLocation: app/src/app/App.tsx
     initialRoutes:
       - path: /
         element: HomePage
   absolutePath:
     alias: "@"
-    target: src
-    importRule: "src 내부 모듈을 import할 때 @ alias를 사용할 수 있다."
-    viteConfigFile: vite.config.ts
+    target: app/src
+    importRule: "app/src 내부 모듈을 import할 때 @ alias를 사용할 수 있다."
+    viteConfigFile: app/vite.config.ts
     tsconfigFiles:
-      - tsconfig.app.json
-      - tsconfig.json
+      - app/tsconfig.app.json
+      - app/tsconfig.json
   install:
     dependencies:
       - react-router-dom
     devDependencies:
       - "@types/node"
   preserveExisting:
-    - src/main.tsx
-    - src/App.tsx
+    - app/src/main.tsx
+    - app/src/App.tsx
 
 references:
   - path: references/router-absolute-path/router.md
@@ -67,25 +67,25 @@ tasks:
   - "기존 entry file이 손상되지 않도록 보존한다."
 
 acceptanceCriteria:
-  - "react-router-dom 의존성이 package.json에 추가된다."
+  - "react-router-dom 의존성이 app/package.json에 추가된다."
   - "라우터 설정 파일은 createBrowserRouter를 사용한다."
   - "라우터는 객체 배열 형태로 route를 정의한다."
   - "앱 엔트리에서 라우터가 연결된다."
-  - "vite.config.ts에 @ alias가 설정된다."
-  - "tsconfig에 @/* paths 설정이 추가된다."
-  - "pnpm build 명령이 통과한다."
+  - "app/vite.config.ts에 @ alias가 설정된다."
+  - "app/tsconfig에 @/* paths 설정이 추가된다."
+  - "pnpm --dir app build 명령이 통과한다."
 
 files:
   expected:
-    - src/app/router/router.tsx
-    - vite.config.ts
-    - tsconfig.app.json
-    - package.json
+    - app/src/app/router/router.tsx
+    - app/vite.config.ts
+    - app/tsconfig.app.json
+    - app/package.json
   avoid:
     - .github/workflows
 
 verification:
-  - "pnpm install"
-  - "pnpm lint"
-  - "pnpm format:check"
-  - "pnpm build"
+  - "pnpm --dir app install"
+  - "pnpm --dir app lint"
+  - "pnpm --dir app format:check"
+  - "pnpm --dir app build"

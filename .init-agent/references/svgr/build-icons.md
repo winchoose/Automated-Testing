@@ -1,6 +1,7 @@
 # SVGR Build Script Reference
 
-아래 코드는 `scripts/build-icons.ts`에 생성할 아이콘 빌드 스크립트 예시입니다.
+아래 코드는 `app/scripts/build-icons.ts`에 생성할 아이콘 빌드 스크립트 예시입니다.
+`pnpm --dir app build:icons`처럼 app 폴더 기준으로 실행하는 것을 전제로 합니다.
 
 ```ts
 import {execSync} from 'node:child_process';
