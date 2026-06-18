@@ -1,5 +1,5 @@
-status: idle
-currentStep: null
+status: running
+currentStep: env-config
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -93,10 +93,10 @@ steps:
     commit: 90776cf4ee789612884bb79cd63f3c701f05927d
     merged: true
   env-config:
-    status: pending
-    issue: null
+    status: running
+    issue: 23
     pullRequest: null
-    branch: null
+    branch: init/env-config/#23
     commit: null
     merged: false
 github:
@@ -112,6 +112,7 @@ github:
     http-client: 17
     svgr: 19
     design-system: 21
+    env-config: 23
   pullRequests:
     project-baseline: 2
     issue-pr-template: 4
@@ -136,10 +137,11 @@ github:
     http-client: init/http-client/#17
     svgr: init/svgr/#19
     design-system: init/design-system/#21
+    env-config: init/env-config/#23
 lastRun:
-  startedAt: 2026-06-18T15:48:09.888Z
-  finishedAt: 2026-06-18T15:48:22.628Z
-  step: design-system
+  startedAt: 2026-06-18T15:48:25.397Z
+  finishedAt: null
+  step: env-config
   error: null
 history:
   - at: 2026-06-18T06:39:35.030Z
@@ -439,3 +441,14 @@ history:
   - at: 2026-06-18T15:48:22.628Z
     step: design-system
     event: step:completed
+  - at: 2026-06-18T15:48:25.397Z
+    step: env-config
+    event: step:running
+  - at: 2026-06-18T15:48:26.137Z
+    step: env-config
+    event: step:issue-created
+    message: "#23"
+  - at: 2026-06-18T15:48:27.942Z
+    step: env-config
+    event: step:branch-created
+    message: init/env-config/#23
