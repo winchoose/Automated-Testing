@@ -12,9 +12,11 @@
     "status": "tsx src/cli.ts status",
     "context": "tsx src/cli.ts context",
     "next": "tsx src/cli.ts next",
+    "execute": "tsx src/cli.ts execute",
     "finish": "tsx src/cli.ts finish",
     "merge": "tsx src/cli.ts merge",
     "run-all": "tsx src/cli.ts run-all",
+    "run-all:dry-run": "tsx src/cli.ts run-all --dry-run",
     "next:dry-run": "tsx src/cli.ts next --dry-run",
     "typecheck": "tsc --noEmit"
   },

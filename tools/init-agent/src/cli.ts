@@ -5,10 +5,11 @@ import {buildGitHubPlan} from './github/buildGitHubPlan.js';
 import {formatStatePreview} from './state/formatStatePreview.js';
 import {formatStatus} from './state/formatStatus.js';
 import {markStepRunning} from './state/updateState.js';
+import {executeCurrentStep} from './workflow/executeCurrentStep.js';
 import {finishCurrentStep} from './workflow/finishCurrentStep.js';
 import {getNextStep} from './workflow/getNextStep.js';
 import {mergeCurrentStep} from './workflow/mergeCurrentStep.js';
-import {planRunAll} from './workflow/runAll.js';
+import {planRunAll, runAll as runAllWorkflow} from './workflow/runAll.js';
 import {startNextStep} from './workflow/startNextStep.js';
 import {validateWorkflow} from './workflow/validateWorkflow.js';
 
@@ -122,6 +123,16 @@ async function finish() {
   console.log('state.yaml updated.');
 }
 
+async function execute() {
+  const config = await loadAgentConfig();
+  const result = await executeCurrentStep(config);
+
+  console.log('executed current step:');
+  console.log(`- step: ${result.stepId}`);
+  console.log(`- message: ${result.message}`);
+  console.log(`- changed files: ${result.changedFiles.join(', ') || 'none'}`);
+}
+
 async function merge() {
   const config = await loadAgentConfig();
   const result = await mergeCurrentStep(config);
@@ -137,15 +148,38 @@ async function merge() {
 
 async function runAll() {
   const config = await loadAgentConfig();
+  const dryRun = args.includes('--dry-run');
+
+  if (dryRun) {
+    const plan = planRunAll(config);
+
+    console.log('run-all plan:');
+    console.log(`- mode: ${plan.mode}`);
+    console.log(`- message: ${plan.message}`);
+    console.log(`- current step: ${plan.currentStepId ?? 'none'}`);
+    console.log(`- next step: ${plan.nextStepId ?? 'none'}`);
+    return;
+  }
+
   const plan = planRunAll(config);
 
-  console.log('run-all plan:');
+  console.log('run-all start:');
   console.log(`- mode: ${plan.mode}`);
   console.log(`- message: ${plan.message}`);
-  console.log(`- current step: ${plan.currentStepId ?? 'none'}`);
-  console.log(`- next step: ${plan.nextStepId ?? 'none'}`);
   console.log('');
-  console.log('Full automatic step execution will be connected after the step executor is implemented.');
+
+  const result = await runAllWorkflow();
+  for (const event of result.events) {
+    console.log(`- [${event.stepId}] ${event.phase}: ${event.message}`);
+  }
+
+  if (result.stoppedBecause) {
+    console.log('');
+    console.log(`stopped: ${result.stoppedBecause}`);
+  } else {
+    console.log('');
+    console.log('run-all completed.');
+  }
 }
 
 function help() {
@@ -157,9 +191,12 @@ Commands:
   context [step]  Print the execution context for a step
   next --dry-run  Show the next runnable step
   next            Create the issue and branch for the next runnable step
+  execute         Execute the registered executor for the running step
   finish          Verify, commit, push, and create a PR for the running step
   merge           Merge the running step PR and mark the step completed
-  run-all         Show the current run-all continuation plan
+  run-all         Start automatic execution for registered step executors
+  run-all --dry-run
+                  Show the current run-all continuation plan
 `);
 }
 
@@ -172,6 +209,8 @@ try {
     await context();
   } else if (command === 'next') {
     await next();
+  } else if (command === 'execute') {
+    await execute();
   } else if (command === 'finish') {
     await finish();
   } else if (command === 'merge') {
