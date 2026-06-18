@@ -5,6 +5,7 @@ import {buildGitHubPlan} from './github/buildGitHubPlan.js';
 import {formatStatePreview} from './state/formatStatePreview.js';
 import {formatStatus} from './state/formatStatus.js';
 import {markStepRunning} from './state/updateState.js';
+import {finishCurrentStep} from './workflow/finishCurrentStep.js';
 import {getNextStep} from './workflow/getNextStep.js';
 import {startNextStep} from './workflow/startNextStep.js';
 import {validateWorkflow} from './workflow/validateWorkflow.js';
@@ -106,6 +107,19 @@ async function next() {
   console.log('state.yaml updated.');
 }
 
+async function finish() {
+  const config = await loadAgentConfig();
+  const result = await finishCurrentStep(config);
+
+  console.log('finished current step work:');
+  console.log(`- step: ${result.stepId}`);
+  console.log(`- commit: ${result.commitSha}`);
+  console.log(`- pull request: #${result.pullRequestNumber} ${result.pullRequestUrl}`);
+  console.log(`- verification: ${result.verificationCommands.join(', ') || 'none'}`);
+  console.log('');
+  console.log('state.yaml updated.');
+}
+
 function help() {
   console.log(`init-agent
 
@@ -115,6 +129,7 @@ Commands:
   context [step]  Print the execution context for a step
   next --dry-run  Show the next runnable step
   next            Create the issue and branch for the next runnable step
+  finish          Verify, commit, push, and create a PR for the running step
 `);
 }
 
@@ -127,6 +142,8 @@ try {
     await context();
   } else if (command === 'next') {
     await next();
+  } else if (command === 'finish') {
+    await finish();
   } else {
     help();
   }

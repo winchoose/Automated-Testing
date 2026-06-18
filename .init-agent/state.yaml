@@ -1,16 +1,14 @@
-status: idle
-currentStep: null
-
+status: running
+currentStep: project-baseline
 completedSteps: []
 failedSteps: []
 skippedSteps: []
-
 steps:
   project-baseline:
-    status: pending
-    issue: null
+    status: running
+    issue: 1
     pullRequest: null
-    branch: null
+    branch: init/project-baseline/#1
     commit: null
     merged: false
   issue-pr-template:
@@ -90,16 +88,26 @@ steps:
     branch: null
     commit: null
     merged: false
-
 github:
-  issues: {}
+  issues:
+    project-baseline: 1
   pullRequests: {}
-  branches: {}
-
+  branches:
+    project-baseline: init/project-baseline/#1
 lastRun:
-  startedAt: null
+  startedAt: 2026-06-18T06:39:35.029Z
   finishedAt: null
-  step: null
+  step: project-baseline
   error: null
-
-history: []
+history:
+  - at: 2026-06-18T06:39:35.030Z
+    step: project-baseline
+    event: step:running
+  - at: 2026-06-18T06:39:35.944Z
+    step: project-baseline
+    event: step:issue-created
+    message: "#1"
+  - at: 2026-06-18T06:39:37.663Z
+    step: project-baseline
+    event: step:branch-created
+    message: init/project-baseline/#1
