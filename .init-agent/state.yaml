@@ -1,434 +1,93 @@
-status: completed
+status: idle
 currentStep: null
-completedSteps:
-  - project-baseline
-  - issue-pr-template
-  - react
-  - eslint-prettier
-  - ci-cd
-  - folder-structure
-  - router-absolute-path
-  - tanstack-query
-  - http-client
-  - svgr
-  - design-system
+completedSteps: []
 failedSteps: []
 skippedSteps: []
 steps:
   project-baseline:
-    status: completed
-    issue: 1
-    pullRequest: 2
-    branch: init/project-baseline/#1
-    commit: df16d03616631d8c6be3ef8a933ea41e228eb891
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   issue-pr-template:
-    status: completed
-    issue: 3
-    pullRequest: 4
-    branch: init/issue-pr-template/#3
-    commit: f470857
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   react:
-    status: completed
-    issue: 5
-    pullRequest: 6
-    branch: init/react/#5
-    commit: c6394c3961736486353193ba4035933722bd2a60
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   eslint-prettier:
-    status: completed
-    issue: 7
-    pullRequest: 8
-    branch: init/eslint-prettier/#7
-    commit: 5d9193af034f6b2fac362db9bb574ab6cb3cc1ac
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   ci-cd:
-    status: completed
-    issue: 9
-    pullRequest: 10
-    branch: init/ci-cd/#9
-    commit: 6c6464f70715220a3d18667957245d1556f6941d
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   folder-structure:
-    status: completed
-    issue: 11
-    pullRequest: 12
-    branch: init/folder-structure/#11
-    commit: d68220c32c7806c01e6938a745bbe56a8b525c18
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   router-absolute-path:
-    status: completed
-    issue: 13
-    pullRequest: 14
-    branch: init/router-absolute-path/#13
-    commit: 1744bbe9f1988a63c34261952071c312f88e9c80
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   tanstack-query:
-    status: completed
-    issue: 15
-    pullRequest: 16
-    branch: init/tanstack-query/#15
-    commit: 2bf2f941b5e4ecc7b6391c652ce57695a30ad01d
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   http-client:
-    status: completed
-    issue: 17
-    pullRequest: 18
-    branch: init/http-client/#17
-    commit: e2435afd6766f7fa44dcc91e77b4e2e49a105adb
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   svgr:
-    status: completed
-    issue: 19
-    pullRequest: 20
-    branch: init/svgr/#19
-    commit: e0a9c7ae0795d1112ee285a0cb1b8b0d54fe467d
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   design-system:
-    status: completed
-    issue: 21
-    pullRequest: 22
-    branch: init/design-system/#21
-    commit: 90776cf4ee789612884bb79cd63f3c701f05927d
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
 github:
-  issues:
-    project-baseline: 1
-    issue-pr-template: 3
-    react: 5
-    eslint-prettier: 7
-    ci-cd: 9
-    folder-structure: 11
-    router-absolute-path: 13
-    tanstack-query: 15
-    http-client: 17
-    svgr: 19
-    design-system: 21
-  pullRequests:
-    project-baseline: 2
-    issue-pr-template: 4
-    react: 6
-    eslint-prettier: 8
-    ci-cd: 10
-    folder-structure: 12
-    router-absolute-path: 14
-    tanstack-query: 16
-    http-client: 18
-    svgr: 20
-    design-system: 22
-  branches:
-    project-baseline: init/project-baseline/#1
-    issue-pr-template: init/issue-pr-template/#3
-    react: init/react/#5
-    eslint-prettier: init/eslint-prettier/#7
-    ci-cd: init/ci-cd/#9
-    folder-structure: init/folder-structure/#11
-    router-absolute-path: init/router-absolute-path/#13
-    tanstack-query: init/tanstack-query/#15
-    http-client: init/http-client/#17
-    svgr: init/svgr/#19
-    design-system: init/design-system/#21
+  issues: {}
+  pullRequests: {}
+  branches: {}
 lastRun:
-  startedAt: 2026-06-18T15:48:09.648Z
-  finishedAt: 2026-06-18T15:48:22.628Z
-  step: design-system
+  startedAt: null
+  finishedAt: null
+  step: null
   error: null
-history:
-  - at: 2026-06-18T06:39:35.030Z
-    step: project-baseline
-    event: step:running
-  - at: 2026-06-18T06:39:35.944Z
-    step: project-baseline
-    event: step:issue-created
-    message: "#1"
-  - at: 2026-06-18T06:39:37.663Z
-    step: project-baseline
-    event: step:branch-created
-    message: init/project-baseline/#1
-  - at: 2026-06-18T06:53:46.117Z
-    step: project-baseline
-    event: step:committed
-    message: df16d03616631d8c6be3ef8a933ea41e228eb891
-  - at: 2026-06-18T06:53:50.160Z
-    step: project-baseline
-    event: step:pull-request-created
-    message: "#2"
-  - at: 2026-06-18T07:12:40.400Z
-    step: project-baseline
-    event: step:completed
-  - at: 2026-06-18T07:42:31.142Z
-    step: issue-pr-template
-    event: step:running
-  - at: 2026-06-18T07:42:31.896Z
-    step: issue-pr-template
-    event: step:issue-created
-    message: "#3"
-  - at: 2026-06-18T07:42:33.581Z
-    step: issue-pr-template
-    event: step:branch-created
-    message: init/issue-pr-template/#3
-  - at: 2026-06-18T07:42:40.000Z
-    step: issue-pr-template
-    event: step:completed
-  - at: 2026-06-18T15:34:53.626Z
-    step: react
-    event: step:running
-  - at: 2026-06-18T15:34:54.790Z
-    step: react
-    event: step:issue-created
-    message: "#5"
-  - at: 2026-06-18T15:34:56.666Z
-    step: react
-    event: step:branch-created
-    message: init/react/#5
-  - at: 2026-06-18T15:35:03.035Z
-    step: react
-    event: step:committed
-    message: c6394c3961736486353193ba4035933722bd2a60
-  - at: 2026-06-18T15:35:11.086Z
-    step: react
-    event: step:pull-request-created
-    message: "#6"
-  - at: 2026-06-18T15:35:15.315Z
-    step: react
-    event: step:completed
-  - at: 2026-06-18T15:35:20.111Z
-    step: eslint-prettier
-    event: step:running
-  - at: 2026-06-18T15:35:20.778Z
-    step: eslint-prettier
-    event: step:issue-created
-    message: "#7"
-  - at: 2026-06-18T15:35:22.560Z
-    step: eslint-prettier
-    event: step:branch-created
-    message: init/eslint-prettier/#7
-  - at: 2026-06-18T15:35:27.153Z
-    step: eslint-prettier
-    event: step:failed
-    message: |-
-      Verification failed: pnpm --dir app format:check
-      > automated-testing-app@0.0.0 format:check /Users/ohseungtaek/Documents/초기세팅 자동화/Automated-Testing/app
-      > prettier . --check
-
-      Checking formatting...
-       ELIFECYCLE  Command failed with exit code 1.
-      [warn] .prettierrc
-      [warn] eslint.config.js
-      [warn] pnpm-lock.yaml
-      [warn] src/main.tsx
-      [warn] tsconfig.json
-      [warn] vite.config.ts
-      [warn] Code style issues found in 6 files. Run Prettier with --write to fix.
-  - at: 2026-06-18T15:41:49.322Z
-    step: eslint-prettier
-    event: step:running
-  - at: 2026-06-18T15:41:54.510Z
-    step: eslint-prettier
-    event: step:committed
-    message: 5d9193af034f6b2fac362db9bb574ab6cb3cc1ac
-  - at: 2026-06-18T15:41:58.525Z
-    step: eslint-prettier
-    event: step:pull-request-created
-    message: "#8"
-  - at: 2026-06-18T15:42:03.339Z
-    step: eslint-prettier
-    event: step:completed
-  - at: 2026-06-18T15:42:07.055Z
-    step: ci-cd
-    event: step:running
-  - at: 2026-06-18T15:42:07.870Z
-    step: ci-cd
-    event: step:issue-created
-    message: "#9"
-  - at: 2026-06-18T15:42:09.705Z
-    step: ci-cd
-    event: step:branch-created
-    message: init/ci-cd/#9
-  - at: 2026-06-18T15:42:13.160Z
-    step: ci-cd
-    event: step:committed
-    message: 6c6464f70715220a3d18667957245d1556f6941d
-  - at: 2026-06-18T15:42:16.670Z
-    step: ci-cd
-    event: step:pull-request-created
-    message: "#10"
-  - at: 2026-06-18T15:42:19.824Z
-    step: ci-cd
-    event: step:completed
-  - at: 2026-06-18T15:42:22.424Z
-    step: folder-structure
-    event: step:running
-  - at: 2026-06-18T15:42:23.100Z
-    step: folder-structure
-    event: step:issue-created
-    message: "#11"
-  - at: 2026-06-18T15:42:24.952Z
-    step: folder-structure
-    event: step:branch-created
-    message: init/folder-structure/#11
-  - at: 2026-06-18T15:42:26.659Z
-    step: folder-structure
-    event: step:failed
-    message: |-
-      Verification failed: pnpm --dir app format:check
-      > automated-testing-app@0.0.0 format:check /Users/ohseungtaek/Documents/초기세팅 자동화/Automated-Testing/app
-      > prettier . --check
-
-      Checking formatting...
-       ELIFECYCLE  Command failed with exit code 1.
-      [warn] src/pages/home/index.ts
-      [warn] Code style issues found in the above file. Run Prettier with --write to fix.
-  - at: 2026-06-18T15:44:08.578Z
-    step: folder-structure
-    event: step:running
-  - at: 2026-06-18T15:44:12.044Z
-    step: folder-structure
-    event: step:committed
-    message: d68220c32c7806c01e6938a745bbe56a8b525c18
-  - at: 2026-06-18T15:44:14.951Z
-    step: folder-structure
-    event: step:pull-request-created
-    message: "#12"
-  - at: 2026-06-18T15:44:17.796Z
-    step: folder-structure
-    event: step:completed
-  - at: 2026-06-18T15:44:20.486Z
-    step: router-absolute-path
-    event: step:running
-  - at: 2026-06-18T15:44:21.272Z
-    step: router-absolute-path
-    event: step:issue-created
-    message: "#13"
-  - at: 2026-06-18T15:44:23.026Z
-    step: router-absolute-path
-    event: step:branch-created
-    message: init/router-absolute-path/#13
-  - at: 2026-06-18T15:44:25.693Z
-    step: router-absolute-path
-    event: step:failed
-    message: |-
-      Verification failed: pnpm --dir app format:check
-      > automated-testing-app@0.0.0 format:check /Users/ohseungtaek/Documents/초기세팅 자동화/Automated-Testing/app
-      > prettier . --check
-
-      Checking formatting...
-       ELIFECYCLE  Command failed with exit code 1.
-      [warn] pnpm-lock.yaml
-      [warn] Code style issues found in the above file. Run Prettier with --write to fix.
-  - at: 2026-06-18T15:45:43.790Z
-    step: router-absolute-path
-    event: step:running
-  - at: 2026-06-18T15:45:48.290Z
-    step: router-absolute-path
-    event: step:committed
-    message: 1744bbe9f1988a63c34261952071c312f88e9c80
-  - at: 2026-06-18T15:45:51.283Z
-    step: router-absolute-path
-    event: step:pull-request-created
-    message: "#14"
-  - at: 2026-06-18T15:45:54.350Z
-    step: router-absolute-path
-    event: step:completed
-  - at: 2026-06-18T15:45:57.975Z
-    step: tanstack-query
-    event: step:running
-  - at: 2026-06-18T15:45:58.899Z
-    step: tanstack-query
-    event: step:issue-created
-    message: "#15"
-  - at: 2026-06-18T15:46:00.904Z
-    step: tanstack-query
-    event: step:branch-created
-    message: init/tanstack-query/#15
-  - at: 2026-06-18T15:46:04.582Z
-    step: tanstack-query
-    event: step:failed
-    message: |-
-      Verification failed: pnpm --dir app build
-      > automated-testing-app@0.0.0 build /Users/ohseungtaek/Documents/초기세팅 자동화/Automated-Testing/app
-      > tsc -b && vite build
-
-      src/app/providers/query-provider.tsx(10,20): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
-       ELIFECYCLE  Command failed with exit code 2.
-  - at: 2026-06-18T15:47:21.000Z
-    step: tanstack-query
-    event: step:running
-  - at: 2026-06-18T15:47:25.818Z
-    step: tanstack-query
-    event: step:committed
-    message: 2bf2f941b5e4ecc7b6391c652ce57695a30ad01d
-  - at: 2026-06-18T15:47:29.774Z
-    step: tanstack-query
-    event: step:pull-request-created
-    message: "#16"
-  - at: 2026-06-18T15:47:32.966Z
-    step: tanstack-query
-    event: step:completed
-  - at: 2026-06-18T15:47:35.910Z
-    step: http-client
-    event: step:running
-  - at: 2026-06-18T15:47:36.754Z
-    step: http-client
-    event: step:issue-created
-    message: "#17"
-  - at: 2026-06-18T15:47:38.675Z
-    step: http-client
-    event: step:branch-created
-    message: init/http-client/#17
-  - at: 2026-06-18T15:47:42.978Z
-    step: http-client
-    event: step:committed
-    message: e2435afd6766f7fa44dcc91e77b4e2e49a105adb
-  - at: 2026-06-18T15:47:46.334Z
-    step: http-client
-    event: step:pull-request-created
-    message: "#18"
-  - at: 2026-06-18T15:47:49.173Z
-    step: http-client
-    event: step:completed
-  - at: 2026-06-18T15:47:51.978Z
-    step: svgr
-    event: step:running
-  - at: 2026-06-18T15:47:52.830Z
-    step: svgr
-    event: step:issue-created
-    message: "#19"
-  - at: 2026-06-18T15:47:54.694Z
-    step: svgr
-    event: step:branch-created
-    message: init/svgr/#19
-  - at: 2026-06-18T15:48:00.952Z
-    step: svgr
-    event: step:committed
-    message: e0a9c7ae0795d1112ee285a0cb1b8b0d54fe467d
-  - at: 2026-06-18T15:48:03.947Z
-    step: svgr
-    event: step:pull-request-created
-    message: "#20"
-  - at: 2026-06-18T15:48:07.064Z
-    step: svgr
-    event: step:completed
-  - at: 2026-06-18T15:48:09.888Z
-    step: design-system
-    event: step:running
-  - at: 2026-06-18T15:48:10.642Z
-    step: design-system
-    event: step:issue-created
-    message: "#21"
-  - at: 2026-06-18T15:48:12.483Z
-    step: design-system
-    event: step:branch-created
-    message: init/design-system/#21
-  - at: 2026-06-18T15:48:16.730Z
-    step: design-system
-    event: step:committed
-    message: 90776cf4ee789612884bb79cd63f3c701f05927d
-  - at: 2026-06-18T15:48:19.819Z
-    step: design-system
-    event: step:pull-request-created
-    message: "#22"
-  - at: 2026-06-18T15:48:22.628Z
-    step: design-system
-    event: step:completed
+history: []
