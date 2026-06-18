@@ -5,12 +5,14 @@ import {executeEslintPrettier} from './eslintPrettier.js';
 import {executeFolderStructure} from './folderStructure.js';
 import {executeHttpClient} from './httpClient.js';
 import {executeIssuePrTemplate} from './issuePrTemplate.js';
+import {executeProjectBaseline} from './projectBaseline.js';
 import {executeReact} from './react.js';
 import {executeRouterAbsolutePath} from './routerAbsolutePath.js';
 import {executeSvgr} from './svgr.js';
 import {executeTanstackQuery} from './tanstackQuery.js';
 
 const executors = new Map<string, StepExecutor>([
+  ['project-baseline', executeProjectBaseline],
   ['issue-pr-template', executeIssuePrTemplate],
   ['react', executeReact],
   ['eslint-prettier', executeEslintPrettier],
