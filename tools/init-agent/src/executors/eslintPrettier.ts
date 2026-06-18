@@ -46,6 +46,7 @@ export default tseslint.config(
   changedFiles.push(await writeText(config.repoRoot, 'app/.prettierignore', `dist
 node_modules
 coverage
+pnpm-lock.yaml
 `));
   changedFiles.push(
     await updatePackageJson(config.repoRoot, 'app/package.json', (packageJson) => ({
