@@ -1,3 +1,7 @@
+import {exec} from 'node:child_process';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {promisify} from 'node:util';
 import type {LoadedAgentConfig} from '../config/loadAgentConfig.js';
 import {commitChanges} from '../git/commitChanges.js';
 import {pushBranch} from '../git/pushBranch.js';
@@ -9,6 +13,8 @@ import {markPullRequestCreated, markStepCommitted, markStepFailed} from '../stat
 import {runVerification} from '../verification/runVerification.js';
 import {getCurrentStep} from './getCurrentStep.js';
 
+const execAsync = promisify(exec);
+
 export type FinishCurrentStepResult = {
   stepId: string;
   commitSha: string;
@@ -16,6 +22,30 @@ export type FinishCurrentStepResult = {
   pullRequestUrl: string;
   verificationCommands: string[];
 };
+
+async function runAppFormatterIfAvailable(repoRoot: string) {
+  try {
+    const packageJsonPath = path.join(repoRoot, 'app/package.json');
+    const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf8')) as {
+      scripts?: Record<string, string>;
+    };
+
+    if (!packageJson.scripts?.format) {
+      return;
+    }
+
+    await execAsync('pnpm --dir app format', {
+      cwd: repoRoot,
+      maxBuffer: 1024 * 1024 * 10,
+    });
+  } catch (error) {
+    if (error instanceof Error && 'code' in error && (error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return;
+    }
+
+    throw error;
+  }
+}
 
 export async function finishCurrentStep(config: LoadedAgentConfig): Promise<FinishCurrentStepResult> {
   const {repoRoot, project, workflow} = config;
@@ -46,6 +76,7 @@ export async function finishCurrentStep(config: LoadedAgentConfig): Promise<Fini
   let nextState = config.state;
 
   try {
+    await runAppFormatterIfAvailable(repoRoot);
     const verificationResults = await runVerification(repoRoot, step.verification ?? []);
     const commitSha = await commitChanges(repoRoot, createCommitMessage(workflow, step));
 
@@ -84,4 +115,3 @@ export async function finishCurrentStep(config: LoadedAgentConfig): Promise<Fini
     throw error;
   }
 }
-

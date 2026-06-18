@@ -1,5 +1,5 @@
-status: idle
-currentStep: null
+status: running
+currentStep: folder-structure
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -45,10 +45,10 @@ steps:
     commit: 6c6464f70715220a3d18667957245d1556f6941d
     merged: true
   folder-structure:
-    status: pending
-    issue: null
+    status: running
+    issue: 11
     pullRequest: null
-    branch: null
+    branch: init/folder-structure/#11
     commit: null
     merged: false
   router-absolute-path:
@@ -100,6 +100,7 @@ github:
     react: 5
     eslint-prettier: 7
     ci-cd: 9
+    folder-structure: 11
   pullRequests:
     project-baseline: 2
     issue-pr-template: 4
@@ -112,10 +113,11 @@ github:
     react: init/react/#5
     eslint-prettier: init/eslint-prettier/#7
     ci-cd: init/ci-cd/#9
+    folder-structure: init/folder-structure/#11
 lastRun:
-  startedAt: 2026-06-18T15:42:07.055Z
-  finishedAt: 2026-06-18T15:42:19.824Z
-  step: ci-cd
+  startedAt: 2026-06-18T15:44:08.578Z
+  finishedAt: null
+  step: folder-structure
   error: null
 history:
   - at: 2026-06-18T06:39:35.030Z
@@ -240,3 +242,29 @@ history:
   - at: 2026-06-18T15:42:19.824Z
     step: ci-cd
     event: step:completed
+  - at: 2026-06-18T15:42:22.424Z
+    step: folder-structure
+    event: step:running
+  - at: 2026-06-18T15:42:23.100Z
+    step: folder-structure
+    event: step:issue-created
+    message: "#11"
+  - at: 2026-06-18T15:42:24.952Z
+    step: folder-structure
+    event: step:branch-created
+    message: init/folder-structure/#11
+  - at: 2026-06-18T15:42:26.659Z
+    step: folder-structure
+    event: step:failed
+    message: |-
+      Verification failed: pnpm --dir app format:check
+      > automated-testing-app@0.0.0 format:check /Users/ohseungtaek/Documents/초기세팅 자동화/Automated-Testing/app
+      > prettier . --check
+
+      Checking formatting...
+       ELIFECYCLE  Command failed with exit code 1.
+      [warn] src/pages/home/index.ts
+      [warn] Code style issues found in the above file. Run Prettier with --write to fix.
+  - at: 2026-06-18T15:44:08.578Z
+    step: folder-structure
+    event: step:running
