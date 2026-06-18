@@ -1,5 +1,5 @@
-status: running
-currentStep: http-client
+status: idle
+currentStep: null
 completedSteps:
   - project-baseline
   - issue-pr-template
@@ -9,6 +9,7 @@ completedSteps:
   - folder-structure
   - router-absolute-path
   - tanstack-query
+  - http-client
 failedSteps: []
 skippedSteps: []
 steps:
@@ -69,12 +70,12 @@ steps:
     commit: 2bf2f941b5e4ecc7b6391c652ce57695a30ad01d
     merged: true
   http-client:
-    status: running
+    status: completed
     issue: 17
-    pullRequest: null
+    pullRequest: 18
     branch: init/http-client/#17
-    commit: null
-    merged: false
+    commit: e2435afd6766f7fa44dcc91e77b4e2e49a105adb
+    merged: true
   svgr:
     status: pending
     issue: null
@@ -116,6 +117,7 @@ github:
     folder-structure: 12
     router-absolute-path: 14
     tanstack-query: 16
+    http-client: 18
   branches:
     project-baseline: init/project-baseline/#1
     issue-pr-template: init/issue-pr-template/#3
@@ -128,7 +130,7 @@ github:
     http-client: init/http-client/#17
 lastRun:
   startedAt: 2026-06-18T15:47:35.910Z
-  finishedAt: null
+  finishedAt: 2026-06-18T15:47:49.173Z
   step: http-client
   error: null
 history:
@@ -374,3 +376,14 @@ history:
     step: http-client
     event: step:branch-created
     message: init/http-client/#17
+  - at: 2026-06-18T15:47:42.978Z
+    step: http-client
+    event: step:committed
+    message: e2435afd6766f7fa44dcc91e77b4e2e49a105adb
+  - at: 2026-06-18T15:47:46.334Z
+    step: http-client
+    event: step:pull-request-created
+    message: "#18"
+  - at: 2026-06-18T15:47:49.173Z
+    step: http-client
+    event: step:completed
