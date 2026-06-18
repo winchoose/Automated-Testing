@@ -1,5 +1,5 @@
 import {exec} from 'node:child_process';
-import {readFile} from 'node:fs/promises';
+import {access, readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {promisify} from 'node:util';
 import type {LoadedAgentConfig} from '../config/loadAgentConfig.js';
@@ -33,6 +33,8 @@ async function runAppFormatterIfAvailable(repoRoot: string) {
     if (!packageJson.scripts?.format) {
       return;
     }
+
+    await access(path.join(repoRoot, 'app/node_modules/.bin/prettier'));
 
     await execAsync('pnpm --dir app format', {
       cwd: repoRoot,

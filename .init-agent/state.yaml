@@ -1,33 +1,30 @@
 status: idle
 currentStep: null
-completedSteps:
-  - project-baseline
-  - issue-pr-template
-  - react
+completedSteps: []
 failedSteps: []
 skippedSteps: []
 steps:
   project-baseline:
-    status: completed
-    issue: 25
-    pullRequest: 26
-    branch: init/project-baseline/#25
-    commit: a875afcff479a43a824a5d6888b5ae809416a1d8
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   issue-pr-template:
-    status: completed
-    issue: 27
-    pullRequest: 28
-    branch: init/issue-pr-template/#27
-    commit: f7e1309d94dd693ec5daf521ae6b3414f4e0e3e4
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   react:
-    status: completed
-    issue: 29
-    pullRequest: 30
-    branch: init/react/#29
-    commit: 87e8f7e8417ac5a25edd55bf88b7fdcf1cb3d201
-    merged: true
+    status: pending
+    issue: null
+    pullRequest: null
+    branch: null
+    commit: null
+    merged: false
   eslint-prettier:
     status: pending
     issue: null
@@ -85,87 +82,12 @@ steps:
     commit: null
     merged: false
 github:
-  issues:
-    project-baseline: 25
-    issue-pr-template: 27
-    react: 29
-  pullRequests:
-    project-baseline: 26
-    issue-pr-template: 28
-    react: 30
-  branches:
-    project-baseline: init/project-baseline/#25
-    issue-pr-template: init/issue-pr-template/#27
-    react: init/react/#29
+  issues: {}
+  pullRequests: {}
+  branches: {}
 lastRun:
-  startedAt: 2026-06-18T16:20:49.862Z
-  finishedAt: 2026-06-18T16:21:01.862Z
-  step: react
+  startedAt: null
+  finishedAt: null
+  step: null
   error: null
-history:
-  - at: 2026-06-18T16:20:25.458Z
-    step: project-baseline
-    event: step:running
-  - at: 2026-06-18T16:20:26.086Z
-    step: project-baseline
-    event: step:issue-created
-    message: "#25"
-  - at: 2026-06-18T16:20:27.856Z
-    step: project-baseline
-    event: step:branch-created
-    message: init/project-baseline/#25
-  - at: 2026-06-18T16:20:28.092Z
-    step: project-baseline
-    event: step:committed
-    message: a875afcff479a43a824a5d6888b5ae809416a1d8
-  - at: 2026-06-18T16:20:30.910Z
-    step: project-baseline
-    event: step:pull-request-created
-    message: "#26"
-  - at: 2026-06-18T16:20:33.471Z
-    step: project-baseline
-    event: step:completed
-  - at: 2026-06-18T16:20:36.356Z
-    step: issue-pr-template
-    event: step:running
-  - at: 2026-06-18T16:20:37.082Z
-    step: issue-pr-template
-    event: step:issue-created
-    message: "#27"
-  - at: 2026-06-18T16:20:39.144Z
-    step: issue-pr-template
-    event: step:branch-created
-    message: init/issue-pr-template/#27
-  - at: 2026-06-18T16:20:39.365Z
-    step: issue-pr-template
-    event: step:committed
-    message: f7e1309d94dd693ec5daf521ae6b3414f4e0e3e4
-  - at: 2026-06-18T16:20:42.552Z
-    step: issue-pr-template
-    event: step:pull-request-created
-    message: "#28"
-  - at: 2026-06-18T16:20:45.991Z
-    step: issue-pr-template
-    event: step:completed
-  - at: 2026-06-18T16:20:49.862Z
-    step: react
-    event: step:running
-  - at: 2026-06-18T16:20:50.496Z
-    step: react
-    event: step:issue-created
-    message: "#29"
-  - at: 2026-06-18T16:20:52.233Z
-    step: react
-    event: step:branch-created
-    message: init/react/#29
-  - at: 2026-06-18T16:20:55.865Z
-    step: react
-    event: step:committed
-    message: 87e8f7e8417ac5a25edd55bf88b7fdcf1cb3d201
-  - at: 2026-06-18T16:20:58.882Z
-    step: react
-    event: step:pull-request-created
-    message: "#30"
-  - at: 2026-06-18T16:21:01.862Z
-    step: react
-    event: step:completed
+history: []
