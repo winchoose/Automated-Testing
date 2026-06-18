@@ -1,0 +1,6 @@
+{
+  "framework": "vite",
+  "buildCommand": "pnpm --dir app build",
+  "installCommand": "pnpm --dir app install --frozen-lockfile",
+  "outputDirectory": "app/dist"
+}
