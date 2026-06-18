@@ -1,5 +1,5 @@
-status: idle
-currentStep: null
+status: running
+currentStep: issue-pr-template
 completedSteps:
   - project-baseline
 failedSteps: []
@@ -13,10 +13,10 @@ steps:
     commit: a875afcff479a43a824a5d6888b5ae809416a1d8
     merged: true
   issue-pr-template:
-    status: pending
-    issue: null
+    status: running
+    issue: 27
     pullRequest: null
-    branch: null
+    branch: init/issue-pr-template/#27
     commit: null
     merged: false
   react:
@@ -85,14 +85,16 @@ steps:
 github:
   issues:
     project-baseline: 25
+    issue-pr-template: 27
   pullRequests:
     project-baseline: 26
   branches:
     project-baseline: init/project-baseline/#25
+    issue-pr-template: init/issue-pr-template/#27
 lastRun:
-  startedAt: 2026-06-18T16:20:25.458Z
-  finishedAt: 2026-06-18T16:20:33.471Z
-  step: project-baseline
+  startedAt: 2026-06-18T16:20:36.356Z
+  finishedAt: null
+  step: issue-pr-template
   error: null
 history:
   - at: 2026-06-18T16:20:25.458Z
@@ -117,3 +119,14 @@ history:
   - at: 2026-06-18T16:20:33.471Z
     step: project-baseline
     event: step:completed
+  - at: 2026-06-18T16:20:36.356Z
+    step: issue-pr-template
+    event: step:running
+  - at: 2026-06-18T16:20:37.082Z
+    step: issue-pr-template
+    event: step:issue-created
+    message: "#27"
+  - at: 2026-06-18T16:20:39.144Z
+    step: issue-pr-template
+    event: step:branch-created
+    message: init/issue-pr-template/#27
