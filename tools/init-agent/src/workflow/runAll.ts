@@ -1,6 +1,9 @@
 import {loadAgentConfig} from '../config/loadAgentConfig.js';
 import type {LoadedAgentConfig} from '../config/loadAgentConfig.js';
 import {hasStepExecutor, listExecutableStepIds} from '../executors/registry.js';
+import {checkoutBranch} from '../git/checkoutBranch.js';
+import {saveState} from '../state/saveState.js';
+import {markStepRunning} from '../state/updateState.js';
 import {executeCurrentStep} from './executeCurrentStep.js';
 import {finishCurrentStep} from './finishCurrentStep.js';
 import {getCurrentStep} from './getCurrentStep.js';
@@ -18,7 +21,7 @@ export type RunAllPlan = {
 
 export type RunAllEvent = {
   stepId: string;
-  phase: 'start' | 'execute' | 'finish' | 'merge' | 'stop';
+  phase: 'start' | 'retry' | 'execute' | 'finish' | 'merge' | 'stop';
   message: string;
 };
 
@@ -117,6 +120,25 @@ export async function runAll(startDirectory = process.cwd()): Promise<RunAllResu
         ],
         stoppedBecause: `No executor registered for running step '${step.id}'.`,
       };
+    }
+
+    const stepState = config.state.steps[step.id];
+
+    if (stepState?.status === 'failed') {
+      events.push({
+        stepId: step.id,
+        phase: 'retry',
+        message: 'Retrying failed step from its existing issue and branch.',
+      });
+
+      const retryState = markStepRunning(config.state, step.id);
+      await saveState(config.repoRoot, config.workflow, retryState);
+
+      if (stepState.branch) {
+        await checkoutBranch(config.repoRoot, stepState.branch);
+      }
+
+      config = await loadAgentConfig(startDirectory);
     }
 
     events.push({
