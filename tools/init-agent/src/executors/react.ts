@@ -126,6 +126,11 @@ createRoot(document.getElementById('root')!).render(
     ),
     writeText(
       config.repoRoot,
+      'app/src/vite-env.d.ts',
+      `/// <reference types="vite/client" />`
+    ),
+    writeText(
+      config.repoRoot,
       'app/src/App.tsx',
       `export default function App() {
   return (
