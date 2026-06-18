@@ -25,6 +25,7 @@ inputs:
   client:
     clientFile: app/src/shared/api/client.ts
     baseUrlEnv: VITE_BASE_URL
+    envExampleFile: app/.env.example
     exportName: apiClient
   behavior:
     timeout: 10000
@@ -42,6 +43,13 @@ inputs:
     dependencies:
       - ky
     devDependencies: []
+  env:
+    publicPrefix: VITE_
+    exampleVariables:
+      - name: VITE_BASE_URL
+        example: "https://api.example.com"
+        description: "API base URL"
+    localFilesCommitted: false
 
 references:
   - path: references/http-client/ky-rules.md
@@ -50,19 +58,27 @@ references:
   - path: references/http-client/axios-rules.md
     type: markdown
     required: false
+  - path: references/env-config/rules.md
+    type: markdown
+    required: false
 
 tasks:
   - "선택된 HTTP client 라이브러리를 설치한다."
   - "공통 API client 파일을 생성한다."
   - "baseURL을 Vite 환경변수에서 읽도록 설정한다."
+  - "VITE_BASE_URL 예시를 app/.env.example에 추가한다."
+  - "app/.env, app/.env.local, app/.env.*.local이 git에 커밋되지 않도록 ignore 규칙을 확인한다."
+  - "README에 로컬 API base URL 설정 방법을 실제 secret 없이 문서화한다."
   - "공통 에러 처리 전략을 정의한다."
   - "TanStack Query에서 사용할 API 요청 함수와 분리 가능한 구조로 작성한다."
-  - "references/http-client와 conventions 문서를 참고해 client 정책을 반영한다."
+  - "references/http-client, references/env-config와 conventions 문서를 참고해 client 정책을 반영한다."
 
 acceptanceCriteria:
   - "선택된 HTTP client 의존성이 app/package.json에 추가된다."
   - "공통 API client 파일이 존재한다."
   - "API baseURL은 환경변수에서 읽는다."
+  - "app/.env.example에는 VITE_BASE_URL 예시가 포함된다."
+  - "실제 env 값과 secret은 repo에 포함되지 않는다."
   - "공통 에러 처리 기준이 코드 또는 문서에 반영된다."
   - "TanStack Query hook과 API 요청 함수를 분리해 사용할 수 있는 구조다."
   - "pnpm --dir app build 명령이 통과한다."
@@ -70,12 +86,18 @@ acceptanceCriteria:
 files:
   expected:
     - app/src/shared/api/client.ts
+    - app/.env.example
+    - README.md
     - app/package.json
   avoid:
     - .github/workflows
+    - app/.env
+    - app/.env.local
 
 verification:
   - "pnpm --dir app install"
+  - "test -f app/.env.example"
+  - "grep -q VITE_BASE_URL app/.env.example"
   - "pnpm --dir app lint"
   - "pnpm --dir app format:check"
   - "pnpm --dir app build"

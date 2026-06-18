@@ -1,9 +1,11 @@
 import type {StepExecutor} from './types.js';
-import {writeText} from './utils.js';
+import {readTextIfExists, writeText} from './utils.js';
 
 export const executeCiCd: StepExecutor = async (config, step) => {
-  const changedFiles = await Promise.all([
-    writeText(
+  const changedFiles: string[] = [];
+
+  changedFiles.push(
+    await writeText(
       config.repoRoot,
       '.github/workflows/ci.yml',
       `name: CI
@@ -49,8 +51,10 @@ jobs:
       - name: Build
         working-directory: app
         run: pnpm build`
-    ),
-    writeText(
+    )
+  );
+  changedFiles.push(
+    await writeText(
       config.repoRoot,
       '.github/workflows/cd.yml',
       `name: Sync to personal repo
@@ -77,8 +81,10 @@ jobs:
       - name: Push to personal repo
         run: |
           git push https://x-access-token:\${{ secrets.PERSONAL_REPO_PAT }}@github.com/Automated-Testing-taek/Automated-Testing.git \${{ github.ref_name }} --force`
-    ),
-    writeText(
+    )
+  );
+  changedFiles.push(
+    await writeText(
       config.repoRoot,
       'vercel.json',
       `{
@@ -87,8 +93,23 @@ jobs:
   "installCommand": "pnpm --dir app install --frozen-lockfile",
   "outputDirectory": "app/dist"
 }`
-    ),
-  ]);
+    )
+  );
+
+  const readme = (await readTextIfExists(config.repoRoot, 'README.md')) ?? '# Automated-Testing\n';
+  const deploymentSection = `## Deployment Secrets
+
+Register this repository secret in GitHub before CD runs:
+
+- \`PERSONAL_REPO_PAT\`: token used by GitHub Actions to push to the Vercel-connected deployment repository.
+`;
+  changedFiles.push(
+    await writeText(
+      config.repoRoot,
+      'README.md',
+      readme.includes('## Deployment Secrets') ? readme : `${readme.trimEnd()}\n\n${deploymentSection}`
+    )
+  );
 
   return {
     stepId: step.id,
@@ -96,4 +117,3 @@ jobs:
     message: 'CI/CD workflows and Vercel config were generated.',
   };
 };
-

@@ -12,7 +12,6 @@ completedSteps:
   - http-client
   - svgr
   - design-system
-  - env-config
 failedSteps: []
 skippedSteps: []
 steps:
@@ -93,13 +92,6 @@ steps:
     branch: init/design-system/#21
     commit: 90776cf4ee789612884bb79cd63f3c701f05927d
     merged: true
-  env-config:
-    status: completed
-    issue: 23
-    pullRequest: 24
-    branch: init/env-config/#23
-    commit: a2b544502ee9d9a40c37e74b6fbe7b672a52f8ea
-    merged: true
 github:
   issues:
     project-baseline: 1
@@ -113,7 +105,6 @@ github:
     http-client: 17
     svgr: 19
     design-system: 21
-    env-config: 23
   pullRequests:
     project-baseline: 2
     issue-pr-template: 4
@@ -126,7 +117,6 @@ github:
     http-client: 18
     svgr: 20
     design-system: 22
-    env-config: 24
   branches:
     project-baseline: init/project-baseline/#1
     issue-pr-template: init/issue-pr-template/#3
@@ -139,11 +129,10 @@ github:
     http-client: init/http-client/#17
     svgr: init/svgr/#19
     design-system: init/design-system/#21
-    env-config: init/env-config/#23
 lastRun:
-  startedAt: 2026-06-18T15:48:25.397Z
-  finishedAt: 2026-06-18T15:48:36.657Z
-  step: env-config
+  startedAt: 2026-06-18T15:48:09.648Z
+  finishedAt: 2026-06-18T15:48:22.628Z
+  step: design-system
   error: null
 history:
   - at: 2026-06-18T06:39:35.030Z
@@ -442,26 +431,4 @@ history:
     message: "#22"
   - at: 2026-06-18T15:48:22.628Z
     step: design-system
-    event: step:completed
-  - at: 2026-06-18T15:48:25.397Z
-    step: env-config
-    event: step:running
-  - at: 2026-06-18T15:48:26.137Z
-    step: env-config
-    event: step:issue-created
-    message: "#23"
-  - at: 2026-06-18T15:48:27.942Z
-    step: env-config
-    event: step:branch-created
-    message: init/env-config/#23
-  - at: 2026-06-18T15:48:30.949Z
-    step: env-config
-    event: step:committed
-    message: a2b544502ee9d9a40c37e74b6fbe7b672a52f8ea
-  - at: 2026-06-18T15:48:33.865Z
-    step: env-config
-    event: step:pull-request-created
-    message: "#24"
-  - at: 2026-06-18T15:48:36.657Z
-    step: env-config
     event: step:completed

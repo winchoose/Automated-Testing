@@ -1,5 +1,5 @@
 import type {StepExecutor} from './types.js';
-import {mergeRecord, updatePackageJson, writeText} from './utils.js';
+import {mergeRecord, removePathIfExists, updatePackageJson, writeText} from './utils.js';
 
 export const executeRouterAbsolutePath: StepExecutor = async (config, step) => {
   const changedFiles: string[] = [];
@@ -106,6 +106,10 @@ createRoot(document.getElementById('root')!).render(
 );`
     )
   );
+  const removedRootApp = await removePathIfExists(config.repoRoot, 'app/src/App.tsx');
+  if (removedRootApp) {
+    changedFiles.push(removedRootApp);
+  }
 
   return {
     stepId: step.id,
@@ -113,4 +117,3 @@ createRoot(document.getElementById('root')!).render(
     message: 'React Router and @ alias were configured.',
   };
 };
-

@@ -1,4 +1,4 @@
-import {mkdir, readFile, writeFile} from 'node:fs/promises';
+import {mkdir, readFile, rm, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {pathExists, resolveRepoPath} from '../config/loadAgentConfig.js';
 
@@ -30,6 +30,16 @@ export async function readTextIfExists(repoRoot: string, relativePath: string) {
   return readFile(filePath, 'utf8');
 }
 
+export async function removePathIfExists(repoRoot: string, relativePath: string) {
+  const filePath = resolveRepoPath(repoRoot, relativePath);
+  if (!(await pathExists(filePath))) {
+    return null;
+  }
+
+  await rm(filePath, {recursive: true, force: true});
+  return relativePath;
+}
+
 export async function updatePackageJson(
   repoRoot: string,
   relativePath: string,
@@ -52,4 +62,3 @@ export function mergeRecord(
     ...additions,
   };
 }
-

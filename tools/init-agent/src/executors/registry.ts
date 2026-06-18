@@ -1,7 +1,6 @@
 import type {StepExecutor} from './types.js';
 import {executeCiCd} from './ciCd.js';
 import {executeDesignSystem} from './designSystem.js';
-import {executeEnvConfig} from './envConfig.js';
 import {executeEslintPrettier} from './eslintPrettier.js';
 import {executeFolderStructure} from './folderStructure.js';
 import {executeHttpClient} from './httpClient.js';
@@ -22,7 +21,6 @@ const executors = new Map<string, StepExecutor>([
   ['http-client', executeHttpClient],
   ['svgr', executeSvgr],
   ['design-system', executeDesignSystem],
-  ['env-config', executeEnvConfig],
 ]);
 
 export function getStepExecutor(stepId: string) {

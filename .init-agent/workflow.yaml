@@ -97,5 +97,3 @@ steps:
     file: steps/09-svgr.yaml
   - id: design-system
     file: steps/10-design-system.yaml
-  - id: env-config
-    file: steps/11-env-config.yaml

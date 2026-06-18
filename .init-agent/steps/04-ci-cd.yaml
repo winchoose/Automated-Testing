@@ -61,8 +61,8 @@ inputs:
     buildCommand: pnpm build
     outputDirectory: dist
   env:
-    managedBy: env-config
-    note: "Vite 환경변수와 .env.example 생성은 env-config 단계에서 관리한다."
+    managedBy: owning-step
+    note: "GitHub Actions secret은 ci-cd 단계에서 문서화하고, Vite 공개 환경변수 예시는 해당 변수를 사용하는 단계에서 관리한다."
   vercelJson:
     create: true
     path: vercel.json
@@ -87,6 +87,7 @@ tasks:
   - "CD workflow에서 Vercel에 연결된 개인 repo의 동일 브랜치로 코드를 push한다."
   - "배포용 repo 정보는 inputs.deploymentRepository 값을 기준으로 설정한다."
   - "repo push에 필요한 GitHub secret 이름을 명시한다."
+  - "repo push에 필요한 GitHub secret 이름과 등록 위치를 문서화한다."
   - "Vite/Vercel 배포 설정을 위한 vercel.json을 생성한다."
   - "Vercel은 배포용 repo의 main 브랜치 변경을 감지해 production deployment를 수행한다."
 
@@ -97,6 +98,7 @@ acceptanceCriteria:
   - "CI workflow는 app 폴더 기준으로 pnpm install, format check, lint, build를 실행한다."
   - "CD workflow는 main/develop push 또는 workflow_dispatch에서 실행된다."
   - "CD workflow는 PERSONAL_REPO_PAT secret을 사용해 배포용 repo로 push한다."
+  - "PERSONAL_REPO_PAT는 실제 값 없이 README 또는 PR 설명에 등록 필요 항목으로 문서화된다."
   - "vercel.json 파일이 존재한다."
   - "Vercel 배포는 Git Integration을 통해 배포용 repo의 main 브랜치를 기준으로 실행된다."
   - "Vercel project의 production branch가 main으로 설정되어 있다."
