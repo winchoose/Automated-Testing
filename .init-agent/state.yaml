@@ -1,8 +1,9 @@
-status: running
-currentStep: react
+status: idle
+currentStep: null
 completedSteps:
   - project-baseline
   - issue-pr-template
+  - react
 failedSteps: []
 skippedSteps: []
 steps:
@@ -21,12 +22,12 @@ steps:
     commit: f7e1309d94dd693ec5daf521ae6b3414f4e0e3e4
     merged: true
   react:
-    status: running
+    status: completed
     issue: 29
-    pullRequest: null
+    pullRequest: 30
     branch: init/react/#29
-    commit: null
-    merged: false
+    commit: 87e8f7e8417ac5a25edd55bf88b7fdcf1cb3d201
+    merged: true
   eslint-prettier:
     status: pending
     issue: null
@@ -91,13 +92,14 @@ github:
   pullRequests:
     project-baseline: 26
     issue-pr-template: 28
+    react: 30
   branches:
     project-baseline: init/project-baseline/#25
     issue-pr-template: init/issue-pr-template/#27
     react: init/react/#29
 lastRun:
   startedAt: 2026-06-18T16:20:49.862Z
-  finishedAt: null
+  finishedAt: 2026-06-18T16:21:01.862Z
   step: react
   error: null
 history:
@@ -156,3 +158,14 @@ history:
     step: react
     event: step:branch-created
     message: init/react/#29
+  - at: 2026-06-18T16:20:55.865Z
+    step: react
+    event: step:committed
+    message: 87e8f7e8417ac5a25edd55bf88b7fdcf1cb3d201
+  - at: 2026-06-18T16:20:58.882Z
+    step: react
+    event: step:pull-request-created
+    message: "#30"
+  - at: 2026-06-18T16:21:01.862Z
+    step: react
+    event: step:completed
